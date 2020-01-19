@@ -204,7 +204,9 @@ export class Tab2Page implements OnInit {
     // console.log(this.searchText);
     for (var j in this.list) {
       for (var p in this.friendLists[this.list[j]]) {
-        if (this.friendLists[this.list[j]][p].remarkName.match(this.searchText) || this.friendLists[this.list[j]][p].userName.match(this.searchText) || this.friendLists[this.list[j]][p].wechatId.match(this.searchText)) {
+        if ((this.friendLists[this.list[j]][p].remarkName!=null && this.friendLists[this.list[j]][p].remarkName.match(this.searchText))
+         || (this.friendLists[this.list[j]][p].userName!=null && this.friendLists[this.list[j]][p].userName.match(this.searchText)) 
+         || (this.friendLists[this.list[j]][p].wechatId!=null && this.friendLists[this.list[j]][p].wechatId.match(this.searchText))) {
           this.searchFriendList.push(this.friendLists[this.list[j]][p])
         }
       }

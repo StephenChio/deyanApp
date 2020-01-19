@@ -213,7 +213,9 @@ export class Tab1Page implements OnInit {
     this.searchChatList = [];
     // console.log(this.searchText);
     for (var p in this.chatsGroup) {
-      if (this.chatsGroup[p].fUserName.match(this.searchText) || this.chatsGroup[p].lastMsg.match(this.searchText) || this.chatsGroup[p].wechatId.match(this.searchText)) {
+      if ((this.chatsGroup[p].fUserName!=null && this.chatsGroup[p].fUserName.match(this.searchText)) 
+       || (this.chatsGroup[p].lastMsg!=null &&this.chatsGroup[p].lastMsg.match(this.searchText))
+       || (this.chatsGroup[p].wechatId!=null &&this.chatsGroup[p].wechatId.match(this.searchText))) {
         this.searchChatList.push(this.chatsGroup[p]);
       }
     }
