@@ -33,6 +33,11 @@ export class SettingsPage implements OnInit {
           localStorage.removeItem("phone");
           localStorage.removeItem("userName");
           localStorage.removeItem("wechatId");
+          localStorage.removeItem("title");
+          localStorage.removeItem("money");
+          localStorage.removeItem("userLevel");
+          localStorage.removeItem("points");
+          localStorage.removeItem("experience");
           localStorage.removeItem("token");
           window.location.href = "login"
         }

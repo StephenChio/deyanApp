@@ -104,6 +104,11 @@ export class VerifiPagePage implements OnInit {
           localStorage.setItem("wechatId", data["wechatId"]);
           localStorage.setItem("imgPath", data["imgPath"]);
           localStorage.setItem("phone", data["phone"]);
+          localStorage.setItem("title", data["title"]);
+          localStorage.setItem("money", data["money"]);
+          localStorage.setItem("userLevel", data["userLevel"]);
+          localStorage.setItem("points", data["points"]);
+          localStorage.setItem("experience", data["experience"]);
           localStorage.setItem("backgroundImg", data["backgroundImg"]);
           // console.log(data);
           localStorage.setItem("hasPassword", data["hasPassword"]);

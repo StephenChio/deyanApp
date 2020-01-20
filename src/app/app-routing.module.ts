@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'set-tag', loadChildren: './set-tag/set-tag.module#SetTagPageModule' },
   { path: 'moment-information', loadChildren: './moment-information/moment-information.module#MomentInformationPageModule' },
   { path: 'tab5', loadChildren: './tab5/tab5.module#Tab5PageModule' },
+  { path: 'language-setting', loadChildren: './language-setting/language-setting.module#LanguageSettingPageModule' },
 ];
 @NgModule({
   imports: [
