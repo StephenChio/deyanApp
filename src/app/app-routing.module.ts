@@ -45,6 +45,10 @@ const routes: Routes = [
   { path: 'moment-information', loadChildren: './moment-information/moment-information.module#MomentInformationPageModule' },
   { path: 'tab5', loadChildren: './tab5/tab5.module#Tab5PageModule' },
   { path: 'language-setting', loadChildren: './language-setting/language-setting.module#LanguageSettingPageModule' },
+  { path: 'more-setting', loadChildren: './more-setting/more-setting.module#MoreSettingPageModule' },
+  { path: 'sex-setting', loadChildren: './sex-setting/sex-setting.module#SexSettingPageModule' },
+  { path: 'sign-setting', loadChildren: './sign-setting/sign-setting.module#SignSettingPageModule' },
+  { path: 'position-setting', loadChildren: './position-setting/position-setting.module#PositionSettingPageModule' },
 ];
 @NgModule({
   imports: [

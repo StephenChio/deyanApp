@@ -18,6 +18,7 @@ export class FriendMomentsPage implements OnInit {
   imgPath: string;
   backgroundImg: string;
   baseUrl: string;
+  sign:any;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
     this.activatedRoute.queryParams.subscribe((data: any) => {
@@ -46,6 +47,7 @@ export class FriendMomentsPage implements OnInit {
           this.Moments = data["data"];
           this.imgPath = globalVar.baseUrl + "/" + data["data"][0].imgPath;
           this.userName = data["data"][0].userName;
+          this.sign = data["data"][0].sign;
           this.backgroundImg = globalVar.baseUrl + "/" + data["data"][0].backgroundImg;
         } else {
           this.common.presentAlert(data["respMsg"])

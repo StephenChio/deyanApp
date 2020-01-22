@@ -38,6 +38,9 @@ export class SettingsPage implements OnInit {
           localStorage.removeItem("userLevel");
           localStorage.removeItem("points");
           localStorage.removeItem("experience");
+          localStorage.removeItem("sex");
+          localStorage.removeItem("position");
+          localStorage.removeItem("sign")
           localStorage.removeItem("token");
           window.location.href = "login"
         }

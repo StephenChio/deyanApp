@@ -110,6 +110,9 @@ export class VerifiPagePage implements OnInit {
           localStorage.setItem("points", data["points"]);
           localStorage.setItem("experience", data["experience"]);
           localStorage.setItem("backgroundImg", data["backgroundImg"]);
+          localStorage.setItem("sex", data["sex"]);
+          localStorage.setItem("position", data["position"]);
+          localStorage.setItem("sign", data["sign"])
           // console.log(data);
           localStorage.setItem("hasPassword", data["hasPassword"]);
           if (data["hasPassword"] == false) {

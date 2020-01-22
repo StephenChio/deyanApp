@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<style>
+    ion-list {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem
+    }
+    .rightText {
+    text-align: right;
+  }
+</style>
+<ion-content color="light">
+  <ion-list lines="none">
+    <ion-item [routerLink]="['/sex-setting']">
+      <ion-label>性别</ion-label>
+      <ion-label class="rightText">{{sex}}</ion-label>
+    </ion-item>
+    <ion-item [routerLink]="['/position-setting']">
+      <ion-label>地区</ion-label>
+      <ion-label class="rightText">{{position}}</ion-label>
+    </ion-item>
+    <ion-item [routerLink]="['/sign-setting']">
+      <ion-label>个性签名</ion-label>
+      <ion-label class="rightText">{{sign}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

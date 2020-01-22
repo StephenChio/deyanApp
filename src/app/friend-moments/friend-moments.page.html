@@ -46,6 +46,7 @@
   <img class="titlePicture" (click)="selectBackground()" src="{{backgroundImg}}">
   <img class="head" src="{{imgPath}}">
   <p style="position: absolute;right: 7rem;top: 22.5rem;color: white;">{{userName}}</p>
+  <p style="position: absolute;right: 2rem;top: 26.5rem;color: gray;">{{sign}}</p>
   <div style="position: absolute; top: 60%;">
     <ion-list *ngFor="let moments of Moments" lines="none">
       <div *ngIf="moments.text || moments.pictureImgPath || moments.videoPath">
