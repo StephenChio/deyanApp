@@ -10,13 +10,13 @@
       <ion-avatar slot="start">
         <img src="{{baseUrl}}/{{imgPath}}">
       </ion-avatar>
-      <p style="margin-left: 1rem;">今天是你加入得言的第51天</p>
+      <p style="margin-left: 1rem;">今天是你加入得言的第{{date}}天</p>
       </div>
-      <ion-searchbar style="margin-bottom: 0.5rem;" placeholder="提个问题">
+      <ion-searchbar (ionFocus)="toQuestionPage()" style="margin-bottom: 0.5rem;" placeholder="提个问题">
       </ion-searchbar>
    
-    <div style="display:flex;">
-      <ion-tab-button>
+    <div style="display:flex;margin-top: 1rem;">
+      <ion-tab-button (click)="toAllQuestionPage()">
         <ion-icon name="list-box"></ion-icon>
         <ion-label>回答问题</ion-label>
       </ion-tab-button>

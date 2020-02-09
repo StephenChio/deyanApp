@@ -4,18 +4,16 @@
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>语种设置</ion-title>
-    <ion-buttons slot="secondary" style="position: absolute;right: 0rem;">
-      <ion-button (click)="updateLanguageSetting()">完成
-      </ion-button>
-    </ion-buttons>
+    <ion-button slot="end" [disabled]="disabledClick" style="position: absolute;right: 0rem;height: 2rem;"
+      color="success" (click)="updateLanguageSetting()">完成</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <style>
-    ion-list {
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem
-    }
+  ion-list {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem
+  }
 </style>
 <ion-content color="light">
   <ion-list lines="none">
@@ -30,20 +28,20 @@
     <ion-item>
       <ion-label>第一外语</ion-label>
       <ion-select [(ngModel)]="firstLanguage" (ngModelChange)="switchFirstLanguage()">
-          <ion-select-option *ngFor="let data of languageList">{{data}}</ion-select-option>
-        </ion-select>
+        <ion-select-option *ngFor="let data of languageList">{{data}}</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>第二外语</ion-label>
       <ion-select [(ngModel)]="secondLanguage" (ngModelChange)="switchSecondLanguage()">
-          <ion-select-option *ngFor="let data of languageList">{{data}}</ion-select-option>
-        </ion-select>
+        <ion-select-option *ngFor="let data of languageList">{{data}}</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>第三外语</ion-label>
       <ion-select [(ngModel)]="thirdLanguage" (ngModelChange)="switchThirdLanguage()">
-          <ion-select-option *ngFor="let data of languageList">{{data}}</ion-select-option>
-        </ion-select>
+        <ion-select-option *ngFor="let data of languageList">{{data}}</ion-select-option>
+      </ion-select>
     </ion-item>
   </ion-list>
 </ion-content>

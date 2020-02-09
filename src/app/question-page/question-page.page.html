@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+          <ion-button (click)="questionPublish()">发布问题
+          </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <ion-item style="--border-width:0;margin-bottom: 1rem;">
+        <ion-textarea [(ngModel)]="title" style = "height: 3rem;" autoGrow placeholder="输入问题并以问号结尾"></ion-textarea>
+    </ion-item>
+    <ion-item style="--border-width:0">
+        <ion-textarea [(ngModel)]="explainText" style = "height: 10rem;" autoGrow placeholder="对问题进行补充说明(选填)"></ion-textarea>
+    </ion-item>
+    <ion-item>
+        <ion-label>选择语种</ion-label>
+        <ion-select [(ngModel)]="language">
+          <ion-select-option *ngFor="let data of languageList">{{data}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+</ion-content>

@@ -44,7 +44,7 @@
   </ion-item>
   <ion-list>
     <ion-item [routerLink]="['/friend-moments']" [queryParams]="{wechatId:wechatId}">
-      <ion-label slot="start" style="max-width: 4rem;">朋友圈</ion-label>
+      <ion-label slot="start" style="max-width: 4rem;">动态</ion-label>
       <div *ngFor="let img of Img4" style="width: 80px;height: 80px;margin: 0.5rem 0.25rem;">
         <img style="width: 80px;height: 80px;object-fit: cover;" src="{{baseUrl}}/{{img}}">
       </div>

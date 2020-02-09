@@ -18,6 +18,7 @@ import { CommentComponentComponent } from './comment-component/comment-component
 import { QuitGuardGuard } from './guard/quit-guard.guard';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { NativeKeyboard } from '@ionic-native/native-keyboard/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 @NgModule({
   declarations: [AppComponent,PopComponentComponent,CommentComponentComponent],
   entryComponents: [PopComponentComponent,CommentComponentComponent],
@@ -34,7 +35,8 @@ import { NativeKeyboard } from '@ionic-native/native-keyboard/ngx';
     Common,
     Popover,
     Keyboard,
-    NativeKeyboard
+    NativeKeyboard,
+    Geolocation
   ],
   bootstrap: [AppComponent]
 })

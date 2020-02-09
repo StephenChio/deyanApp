@@ -15,7 +15,7 @@
 </ion-header>
 <ion-content color="dark">
   <div style="margin-top: 3rem;">
-    <ion-slides (ionSlidePrevEnd)="ionSlidePrevEnd()" (ionSlideNextEnd)="ionSlideNextEnd()">
+    <ion-slides [options]="slideOpts" (ionSlidePrevEnd)="ionSlidePrevEnd()" (ionSlideNextEnd)="ionSlideNextEnd()">
       <ion-slide style="height: 36rem;" *ngFor="let ps of pictures;index as i">
           <img style="width: 100%;" src="{{baseUrl}}/{{pictures[i]}}" />
       </ion-slide>

@@ -23,7 +23,7 @@ export class ChangePhonePagePage implements OnInit {
    * 修改手机
    * @param phone 
    */
-  checkPhoneUsed(phone: any): boolean {
+  checkPhoneUsed(phone: any) {
     let path = globalVar.baseUrl + "/checkPhoneUsed"
     const body = new HttpParams()
       .set("phone", phone)
@@ -33,18 +33,19 @@ export class ChangePhonePagePage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
-          return true;
+          this.sendVerifiCode()
+        }
+        else{
+          this.common.presentAlert(data["respMsg"])
         }
       },
         error => {
-          this.common.presentAlert("系统繁忙,请重试");
-          return false;
+          this.common.presentAlert(globalVar.busyAlert);
         }
       );
-    return false;
   }
   /**
    * 下一步
@@ -62,11 +63,7 @@ export class ChangePhonePagePage implements OnInit {
       this.common.presentAlert("请勿重复绑定手机");
       return false;
     }
-    if (this.checkPhoneUsed(this.newPhone) == false) {
-      this.common.presentAlert("该手机号已被使用,请更换手机号码重试");
-      return;
-    }
-    this.sendVerifiCode()
+    this.checkPhoneUsed(this.newPhone)
   }
   /**
    * 发送验证码
@@ -81,7 +78,7 @@ export class ChangePhonePagePage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.router.navigate(['/write-verifi-code'], {
@@ -95,7 +92,7 @@ export class ChangePhonePagePage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("系统繁忙,请重试");
+          this.common.presentAlert(globalVar.busyAlert);
         }
       );
   }

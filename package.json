@@ -24,6 +24,7 @@
     "@ionic-native/core": "^5.19.1",
     "@ionic-native/file": "^5.19.1",
     "@ionic-native/file-transfer": "^5.19.1",
+    "@ionic-native/geolocation": "^5.19.1",
     "@ionic-native/image-picker": "^5.19.1",
     "@ionic-native/keyboard": "^5.19.1",
     "@ionic-native/native-keyboard": "^5.19.1",
@@ -37,6 +38,7 @@
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-file-transfer": "^1.7.1",
+    "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-native-keyboard": "^2.0.5",
     "cordova-plugin-telerik-imagepicker": "^2.3.3",
     "core-js": "^2.6.11",
@@ -99,7 +101,8 @@
         "LICENSE": "TRIAL",
         "LIC_ANDROID": "TRIAL",
         "LIC_IOS": "TRIAL"
-      }
+      },
+      "cordova-plugin-geolocation": {}
     },
     "platforms": [
       "ios",

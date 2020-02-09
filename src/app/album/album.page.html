@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>朋友圈相册</ion-title>
+    <ion-title>相册</ion-title>
   </ion-toolbar>
 </ion-header>
 <style>
@@ -21,7 +21,7 @@
   <div>
     <ion-item style="margin-top: 1rem;margin-bottom: 1rem;"lines="none" [routerLink]="['/friend-moments']" [queryParams]="{wechatId:wechatId}">
       <ion-label slot="end" style="color:cornflowerblue;text-align: right;">
-        我的朋友圈
+        我的动态
       </ion-label>
     </ion-item>
     <ion-list *ngFor="let moments of Moments" lines="none">
@@ -32,7 +32,7 @@
             <div *ngIf="null !== moments.pictureImgPath" style="display: flex;flex-wrap:wrap;width: 258px;">
               <div *ngFor="let pictureImgPath of moments.pictureImgPath;index as i"
                 style="display:inline-block;width:80px;height:80px;margin: 3px;">
-                <img (click)="showPicInfo(moments.id,moments.wechatId,moments.pictureId,moments.pictureImgPath,moments.pictureImgPath[i],moments.text,moments.createTime)" style="width:80px;height:80px;object-fit: cover;" src="{{baseUrl}}/{{moments.pictureImgPath[i]}}">
+                <img (click)="showPicInfo(moments.id,moments.wechatId,moments.pictureId,moments.pictureImgPath,i,moments.text,moments.createTime)" style="width:80px;height:80px;object-fit: cover;" src="{{baseUrl}}/{{moments.pictureImgPath[i]}}">
               </div>
             </div>
           </div>

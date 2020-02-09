@@ -30,7 +30,11 @@ export class MomentsPage implements OnInit {
     this.imgPath = localStorage.getItem("imgPath")
     this.backgroundImg = localStorage.getItem("backgroundImg")
     this.activatedRoute.queryParams.subscribe((data: any) => {
-      this.getMoments();
+      if(data.num!=undefined){
+        this.getMoments();
+      }else{
+        this.Moments = JSON.parse(localStorage.getItem(this.wechatId+"Moments"));
+      }
     })
   }
   /**
@@ -65,7 +69,7 @@ export class MomentsPage implements OnInit {
     })
   }
   /**
-   * 获得朋友圈内容
+   * 获得动态内容
    */
   getMoments() {
     let path = globalVar.baseUrl + "/moments/getMoments"
@@ -78,21 +82,22 @@ export class MomentsPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.Moments = data["data"];
+          localStorage.setItem(this.wechatId+"Moments",JSON.stringify(this.Moments));
         } else {
           this.common.presentAlert(data["respMsg"])
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   /**
    * 
-   * @param backgroundImg 更新朋友圈封面
+   * @param backgroundImg 更新动态封面
    */
   updateBackgroundImg(backgroundImg: any) {
     let path = globalVar.baseUrl + "/userInfo/updateBackgroundImg"
@@ -106,7 +111,7 @@ export class MomentsPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.common.presentAlert(data["respMsg"])
@@ -117,7 +122,7 @@ export class MomentsPage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   /**
@@ -213,7 +218,7 @@ export class MomentsPage implements OnInit {
     // this.popor.presentPopover(CommentComponentComponent);
   }
   comment() {
-    this.common.presentAlert("评论功能暂未开放,敬请期待")
+    this.common.presentAlert(globalVar.comingSoon)
   }
   /**
    * 
@@ -231,7 +236,7 @@ export class MomentsPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.getMoments()
@@ -240,7 +245,7 @@ export class MomentsPage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   /**
@@ -251,14 +256,14 @@ export class MomentsPage implements OnInit {
    * @param text 
    * @param time 
    */
-  showPicInfo(momentId: any, wechatId: any, pictureId: any, pictures: any, picture: any, text: any, time: any) {
+  showPicInfo(momentId: any, wechatId: any, pictureId: any, pictures: any, index: any, text: any, time: any) {
     // console.log(pictures)
     // console.log(picture)
     this.router.navigate(['/picture-information'], {
       queryParams: {
         wechatId: wechatId,
         pictures: pictures,
-        picture: picture,
+        index: index,
         time: time,
         pictureId: pictureId,
         text: text,
@@ -300,8 +305,7 @@ export class MomentsPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.getMoments()
@@ -310,7 +314,7 @@ export class MomentsPage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
 }

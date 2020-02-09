@@ -16,7 +16,6 @@ export class PictureInformationPage implements OnInit {
   pictures: any;
   picture: any;
   baseUrl: any;
-  start = 1;
   all: any;
   title: any;
   page: any;
@@ -24,19 +23,25 @@ export class PictureInformationPage implements OnInit {
   pictureId: any;
   type: any
   id: any;
+  index:number;
   wechatId: any;
+  slideOpts = {
+    initialSlide: 0
+  };
   ngOnInit() {
     this.baseUrl = this.baseUrl = globalVar.baseUrl
     this.activatedRoute.queryParams.subscribe((data: any) => {
       this.wechatId = data.wechatId;
       this.id = data.momentId;
       this.pictures = data.pictures;
-      // this.picture = data.picture;
+      this.slideOpts.initialSlide = Number(data.index);
+      this.index = Number(this.slideOpts.initialSlide);
       this.pictureId = data.pictureId;
       this.text = data.text;
       this.title = data.time;
       this.all = this.pictures.length;
-      this.page = this.start + "/" + this.all
+      if(this.index==0){this.index=1}
+      this.page = this.index + "/" + this.all
     });
 
   }
@@ -45,8 +50,9 @@ export class PictureInformationPage implements OnInit {
    * @param i 下一张图片
    */
   ionSlideNextEnd(i: any) {
-    this.start = this.start + 1;
-    this.page = this.start + "/" + this.all
+    this.index = this.index + 1;
+    this.page = this.index + "/" + this.all
+    // alert(this.index)
     // console.log("next")
   }
   /**
@@ -54,8 +60,9 @@ export class PictureInformationPage implements OnInit {
    * @param i 上一张图片
    */
   ionSlidePrevEnd(i: any) {
-    this.start = this.start - 1;
-    this.page = this.start + "/" + this.all
+    this.index = this.index - 1;
+    this.page = this.index + "/" + this.all
+    // alert(this.index)
     // console.log("prev")
   }
   selectActionSheet() {
@@ -173,7 +180,7 @@ export class PictureInformationPage implements OnInit {
     await alert.present();
   }
   /**
-   * 删除朋友圈
+   * 删除动态
    */
   deleteMomentsById(id: any) {
     let path = globalVar.baseUrl + "/moments/deleteMomentsById"
@@ -184,7 +191,7 @@ export class PictureInformationPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.router.navigate(['/album'])
@@ -193,7 +200,7 @@ export class PictureInformationPage implements OnInit {
 
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   clickLike() {
@@ -207,12 +214,12 @@ export class PictureInformationPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         this.common.presentAlert(data["respMsg"])
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   showDetail() {

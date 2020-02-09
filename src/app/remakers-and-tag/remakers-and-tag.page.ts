@@ -13,9 +13,46 @@ export class RemakersAndTagPage implements OnInit {
   constructor(private http: HttpClient, private common: Common, private globalVar: globalVar) { }
   remarkName: any
   phone: any
-  describe: any
+  describeText: any
   ngOnInit() {
-    this.remarkName = localStorage.getItem("fUserName")
+    this.getRemakers();
+  }
+  getRemakers() {
+    let path = globalVar.baseUrl + "/remark/getRemakers"
+    const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
+      .set("fWechatId", localStorage.getItem("fWechatId"))
+      .set("token", localStorage.getItem("token"))
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
+        localStorage.setItem("token", data["token"]);
+        // this.common.presentAlert(data["respMsg"])
+        if (data["respCode"] == "00") {
+          data = data["data"]
+          // console.log(data)
+          if(data==null){
+            this.remarkName = localStorage.getItem("fUserName")
+            return
+          }
+          if (data["remarkName"] == null) {
+            this.remarkName = localStorage.getItem("fUserName")
+          } else {
+            this.remarkName = data["remarkName"];
+          }
+          this.phone = data["phone"];
+          this.describeText = data["describeText"];
+        }
+        else {
+          this.common.presentAlert(data["respMsg"])
+        }
+      },
+        error => {
+          this.common.presentAlert(globalVar.busyAlert)
+        })
   }
   /**
    * 更新备注
@@ -30,7 +67,7 @@ export class RemakersAndTagPage implements OnInit {
         return;
       }
     }
-    if (this.phone == null) {
+    if (this.phone == null || this.phone=="") {
       this.phone = "";
     }
     else {
@@ -40,11 +77,11 @@ export class RemakersAndTagPage implements OnInit {
         return;
       }
     }
-    if (this.describe == null) {
-      this.describe = "";
+    if (this.describeText == null) {
+      this.describeText = "";
     }
     else {
-      if (this.describe >= 120) {
+      if (this.describeText >= 120) {
         this.common.presentAlert("请勿输入超过120个字")
         return;
       }
@@ -55,19 +92,19 @@ export class RemakersAndTagPage implements OnInit {
       .set("fWechatId", localStorage.getItem("fWechatId"))
       .set("remarkName", this.remarkName)
       .set("phone", this.phone)
-      .set("describe", this.describe)
-      .set("token",localStorage.getItem("token"))
+      .set("describeText", this.describeText)
+      .set("token", localStorage.getItem("token"))
     let httpOptions = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         this.common.presentAlert(data["respMsg"])
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         })
   }
 }

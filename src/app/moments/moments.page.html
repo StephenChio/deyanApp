@@ -86,7 +86,7 @@
               <div *ngFor="let pictureImgPath of moments.pictureImgPath;index as i"
                 style="margin:0.15rem;display:inline-block;width:90px;height:90px;">
                 <img
-                  (click)="showPicInfo(moments.id,moments.wechatId,moments.pictureId,moments.pictureImgPath,moments.pictureImgPath[i],moments.text,moments.createTime)"
+                  (click)="showPicInfo(moments.id,moments.wechatId,moments.pictureId,moments.pictureImgPath,i,moments.text,moments.createTime)"
                   style="width:90px;height:90px;object-fit: cover;" src="{{baseUrl}}/{{moments.pictureImgPath[i]}}">
               </div>
             </div>

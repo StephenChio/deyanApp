@@ -60,7 +60,7 @@ export class VerifiPagePage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("系统繁忙,请重试");
+          this.common.presentAlert(globalVar.busyAlert);
         }
       );
   }
@@ -131,26 +131,26 @@ export class VerifiPagePage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("系统繁忙,请重试");
+          this.common.presentAlert(globalVar.busyAlert);
         }
       );
   }
   getMoreOptions() {
-    this.common.presentAlert("敬请期待")
+    this.common.presentAlert(globalVar.comingSoon)
   }
   findPassword() {
-    this.common.presentAlert("敬请期待")
+    this.common.presentAlert(globalVar.comingSoon)
   }
   emergencyFreeze() {
-    this.common.presentAlert("敬请期待")
+    this.common.presentAlert(globalVar.comingSoon)
   }
   async changeVerifiWay() {
     let msg = null;
     if (this.useVerifiCode) {
-      msg = "用密码登陆"
+      msg = globalVar.loginWithPass
     }
     else {
-      msg = "用验证码登陆"
+      msg = globalVar.loginWithCode
     }
     const actionSheet = await this.actionSheetController.create({
       // header: 'Albums',

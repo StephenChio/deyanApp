@@ -49,6 +49,11 @@ const routes: Routes = [
   { path: 'sex-setting', loadChildren: './sex-setting/sex-setting.module#SexSettingPageModule' },
   { path: 'sign-setting', loadChildren: './sign-setting/sign-setting.module#SignSettingPageModule' },
   { path: 'position-setting', loadChildren: './position-setting/position-setting.module#PositionSettingPageModule' },
+  { path: 'my-question', loadChildren: './my-question/my-question.module#MyQuestionPageModule' },
+  { path: 'my-answer', loadChildren: './my-answer/my-answer.module#MyAnswerPageModule' },
+  { path: 'question-page', loadChildren: './question-page/question-page.module#QuestionPagePageModule' },
+  { path: 'all-question-page', loadChildren: './all-question-page/all-question-page.module#AllQuestionPagePageModule' },
+  { path: 'question-information', loadChildren: './question-information/question-information.module#QuestionInformationPageModule' },
 ];
 @NgModule({
   imports: [

@@ -4,14 +4,12 @@
           <ion-back-button defaultHref="/"></ion-back-button>
       </ion-buttons>
       <ion-title style="background: #f4f5f8;">设置地区</ion-title>
-      <ion-buttons slot="secondary" style="position: absolute;right: 0rem;">
-          <ion-button (click)="updateName()">完成
-          </ion-button>
-      </ion-buttons>
+      <ion-button slot="end" [disabled]="disabledClick" style="position: absolute;right: 0rem;height: 2rem;"
+      color="success" (click)="updatePosition()">完成</ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content color="light">
   <ion-item style="--border-width:0">
-      <ion-input [(ngModel)]="userName"></ion-input>
+      <ion-input [(ngModel)]="position"></ion-input>
   </ion-item>
 </ion-content>

@@ -50,7 +50,7 @@ export class WriteVerifiCodePage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           localStorage.setItem("phone", this.phone)
@@ -58,7 +58,7 @@ export class WriteVerifiCodePage implements OnInit {
         this.common.presentAlert(data["respMsg"]);
       },
         error => {
-          this.common.presentAlert("系统繁忙,请重试");
+          this.common.presentAlert(globalVar.busyAlert);
         }
       );
   }
@@ -93,12 +93,12 @@ export class WriteVerifiCodePage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         this.common.presentAlert(data["respMsg"]);
       },
         error => {
-          this.common.presentAlert("系统繁忙,请重试");
+          this.common.presentAlert(globalVar.busyAlert);
         }
       );
   }

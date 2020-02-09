@@ -53,7 +53,7 @@ export class AddFriendPagePage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           if (data["data"].length > 0) {
@@ -68,7 +68,7 @@ export class AddFriendPagePage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
 }

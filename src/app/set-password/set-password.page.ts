@@ -59,7 +59,7 @@ export class SetPasswordPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.newPwd = null;
@@ -67,18 +67,18 @@ export class SetPasswordPage implements OnInit {
           this.oldPwd = null;
           this.common.presentAlert(data["respMsg"]);
           if (this.hasPassword == "true") {
-            this.router.navigate(['/'])
+            this.router.navigate(['/account-safe'])
           }
           else {
             localStorage.setItem("hasPassword", "true")
-            this.router.navigate(['/account-safe'])
+            this.router.navigate(['/'])
           }
         } else {
           this.common.presentAlert(data["respMsg"])
         }
       },
         error => {
-          this.common.presentAlert("系统繁忙,请重试");
+          this.common.presentAlert(globalVar.busyAlert);
         }
       );
   }
@@ -103,7 +103,7 @@ export class SetPasswordPage implements OnInit {
         // role: 'destructive',
         // icon: 'trash',
         handler: () => {
-          this.common.presentAlert("敬请期待")
+          this.common.presentAlert(globalVar.comingSoon)
         }
       }, {
         text: '取消',

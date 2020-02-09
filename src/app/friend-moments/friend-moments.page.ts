@@ -27,7 +27,7 @@ export class FriendMomentsPage implements OnInit {
     })
   }
   /**
-   * 得到用户朋友圈内容
+   * 得到用户动态内容
    * @param wechatId 
    */
   getFriendMoments(wechatId: any) {
@@ -41,7 +41,7 @@ export class FriendMomentsPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.Moments = data["data"];
@@ -54,7 +54,7 @@ export class FriendMomentsPage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   /**
@@ -84,7 +84,7 @@ export class FriendMomentsPage implements OnInit {
         queryParams: {
           wechatId: moment.wechatId,
           pictures: moment.pictureImgPath,
-          // picture: picture,
+          index: 0,
           time: moment.createTime,
           pictureId: moment.pictureId,
           text: moment.text,

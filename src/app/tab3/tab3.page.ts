@@ -27,7 +27,10 @@ export class Tab3Page implements OnInit {
     }
   }
   moments() {
+    var num = this.momentsNum
     this.momentsNum = null;
-    this.router.navigate(['/moments']);
+    this.router.navigate(['/moments'], {
+      queryParams: { num:num }
+    });
   }
 }

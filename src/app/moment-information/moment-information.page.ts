@@ -52,7 +52,7 @@ export class MomentInformationPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.Moments = data["data"];
@@ -62,7 +62,7 @@ export class MomentInformationPage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   clickLike(momentId: any, wechatId: any) {
@@ -77,7 +77,7 @@ export class MomentInformationPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           // this.common.presentAlert(data["respMsg"])
@@ -87,7 +87,7 @@ export class MomentInformationPage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   /**
@@ -124,7 +124,7 @@ export class MomentInformationPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.router.navigate(['/friend-moments'], {
@@ -137,7 +137,7 @@ export class MomentInformationPage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   async presentActionSheet() {
@@ -161,6 +161,6 @@ export class MomentInformationPage implements OnInit {
     await actionSheet.present();
   }
   comment() {
-    this.common.presentAlert("评论功能暂未开放,敬请期待")
+    this.common.presentAlert(globalVar.comingSoon)
   }
 }

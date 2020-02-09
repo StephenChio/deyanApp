@@ -34,13 +34,26 @@ export class ChatPagePage implements OnInit {
     this.chats = JSON.parse(localStorage.getItem(localStorage.getItem("wechatId") + this.fWechatId))
     if (this.chats == null) {
       this.chats = []
+      if(this.fWechatId == "root001"){
+        this.chats = [{wechatId: "root001", imgPath: "img/head.png", msg: "请问有什么可以帮到您呢？"}]
+      }
       localStorage.setItem(localStorage.getItem("wechatId") + this.fWechatId, JSON.stringify(this.chats))
       var chatsGroup = JSON.parse(localStorage.getItem(this.wechatId + "chats"))
       if (chatsGroup == null) {
+        if(this.fWechatId == "root001"){
+          chatsGroup = [{ wechatId: this.fWechatId, fUserName: this.fUserName, lastMsg: "请问有什么可以帮到您呢？", msgNum: null, imgPath: this.imgPath }]
+        }
+        else{
         chatsGroup = [{ wechatId: this.fWechatId, fUserName: this.fUserName, lastMsg: "", msgNum: null, imgPath: this.imgPath }]
+        }
       }
       else {
+        if(this.fWechatId == "root001"){
+          chatsGroup.push({ wechatId: this.fWechatId, fUserName: this.fUserName, lastMsg: "请问有什么可以帮到您呢？", msgNum: null, imgPath: this.imgPath })
+        }
+        else{
         chatsGroup.push({ wechatId: this.fWechatId, fUserName: this.fUserName, lastMsg: "", msgNum: null, imgPath: this.imgPath })
+        }
       }
       localStorage.setItem(this.wechatId + "chats", JSON.stringify(chatsGroup))
     }
@@ -168,7 +181,7 @@ export class ChatPagePage implements OnInit {
           localStorage.setItem(localStorage.getItem("wechatId") + "chats", JSON.stringify(chatsGroup))
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         });
   }
   // KeyboardShow(){

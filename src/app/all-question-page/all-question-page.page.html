@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>回答问题</ion-title>
+  </ion-toolbar>
+</ion-header>
+<style>
+  ion-list {
+    margin-bottom: 0.5rem;
+  }
+</style>
+<ion-content color="light">
+  <div style="display: flex;position: sticky;z-index: 2;top: 0;background: white;">
+  <ion-segment [(ngModel)]="segmentChange" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="page1" (click)="choosePage1()">
+        <ion-label>关注</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="page2" (click)="choosePage2()">
+        <ion-label>推荐</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-slides #slides [options]="sliderOptions" (ionSlidePrevEnd)="ionSlidePrevEnd()" (ionSlideNextEnd)="ionSlideNextEnd()">
+    <ion-slide style="display: block;" >
+      <ion-list *ngFor="let q of questionList" lines="none">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="{{baseUrl}}/{{q.imgPath}}">
+          </ion-avatar>
+          <ion-label style="height: 2rem;">
+            <h2 style="font-size: 12px;">{{q.userName}}</h2>
+            <p style="font-size: 10px;opacity: 0.7;">{{q.date}}.添加了问题</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <h2 style="font-size: 16px;margin: 0;">{{q.title}}</h2>
+          <ion-label>{{q.answerList}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <p style="font-size: 12px;opacity: 0.7;">{{q.answerNum}}个回答.{{q.followNum}}个关注</p>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide style="display: block;">
+        <ion-list *ngFor="let q of allQuestionList" lines="none">
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="{{baseUrl}}/{{q.imgPath}}">
+            </ion-avatar>
+            <ion-label style="height: 2rem;">
+              <h2 style="font-size: 12px;">{{q.userName}}</h2>
+              <p style="font-size: 10px;opacity: 0.7;">{{q.date}}.添加了问题</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <h2 style="font-size: 16px;margin: 0;">{{q.title}}</h2>
+            <ion-label>{{q.answerList}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <p style="font-size: 12px;opacity: 0.7;">{{q.answerNum}}个回答.{{q.followNum}}个关注</p>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+  </ion-slides>
+</ion-content>

@@ -55,7 +55,7 @@ export class FriendCardPage implements OnInit {
     this.get4MomentsImgByWechatId();
   }
   /**
-   * 得到用户最近4张朋友圈预览图片
+   * 得到用户最近4张动态预览图片
    */
   get4MomentsImgByWechatId() {
     let path = globalVar.baseUrl + "/resource/get4MomentsImgByWechatId"
@@ -67,7 +67,7 @@ export class FriendCardPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.Img4 = data["data"]
@@ -77,7 +77,7 @@ export class FriendCardPage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         })
   }
   /**
@@ -112,7 +112,7 @@ export class FriendCardPage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if(data==null)this.common.quit("登陆超时,请重新登陆");
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.common.presentAlert(data["respMsg"])
@@ -121,7 +121,7 @@ export class FriendCardPage implements OnInit {
         }
       },
         error => {
-          this.common.presentAlert("服务器繁忙,请重试")
+          this.common.presentAlert(globalVar.busyAlert)
         })
   }
 }
