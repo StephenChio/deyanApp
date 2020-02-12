@@ -31,7 +31,11 @@ export class AllQuestionPagePage implements OnInit {
 
   }
   doRefresh(event) {
-    this.getAllQuestionListByLanguageOption()
+    if(this.segmentChange=='page1'){
+      this.getAllQuestionListByLanguageOption();
+    }else{
+      this.getAllQuestionList();
+    }
     setTimeout(() => {
       // console.log('Async operation has ended');
       event.target.complete();
@@ -55,12 +59,12 @@ export class AllQuestionPagePage implements OnInit {
   }
   choosePage1(){
     // this.sliderOptions.initialSlide = 0
-    this.getAllQuestionListByLanguageOption();
+    // this.getAllQuestionListByLanguageOption();
     this.slides.slidePrev();
   }
   choosePage2(){
     // this.sliderOptions.initialSlide = 1
-    this.getAllQuestionList();
+    // this.getAllQuestionList();
     this.slides.slideNext();
   }
   getAllQuestionList(){
@@ -106,5 +110,11 @@ export class AllQuestionPagePage implements OnInit {
         error => {
           this.common.presentAlert(globalVar.busyAlert)
         })
+  }
+  getQuestionInformation(id:any){
+    this.router.navigate(['/question-information'],
+              {
+                queryParams: { id: id }
+              })
   }
 }

@@ -54,6 +54,7 @@ const routes: Routes = [
   { path: 'question-page', loadChildren: './question-page/question-page.module#QuestionPagePageModule' },
   { path: 'all-question-page', loadChildren: './all-question-page/all-question-page.module#AllQuestionPagePageModule' },
   { path: 'question-information', loadChildren: './question-information/question-information.module#QuestionInformationPageModule' },
+  { path: 'my-follow', loadChildren: './my-follow/my-follow.module#MyFollowPageModule' },
 ];
 @NgModule({
   imports: [

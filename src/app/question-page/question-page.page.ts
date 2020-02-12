@@ -25,7 +25,7 @@ export class QuestionPagePage implements OnInit {
       return
     }
     else {
-      if (this.title[this.title.length - 1] != "？") {
+      if (this.title[this.title.length - 1] != "？" && this.title[this.title.length - 1] != "?") {
         this.common.presentAlert("问题请以问号结尾")
         return
       }

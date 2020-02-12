@@ -13,6 +13,10 @@ export class Common {
    * 
    * @param msg 通用弹出通知组件
    */
+  log(msg: any){
+    console.log(msg)
+  }
+
   async presentAlert(msg: any) {
     const alert = await this.alertController.create({
       header: '确认',

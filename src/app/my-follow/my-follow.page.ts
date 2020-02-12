@@ -5,28 +5,28 @@ import { Common } from '../Common/common';
 import { globalVar } from 'src/globalVar';
 
 @Component({
-  selector: 'app-my-question',
-  templateUrl: './my-question.page.html',
-  styleUrls: ['./my-question.page.scss'],
+  selector: 'app-my-follow',
+  templateUrl: './my-follow.page.html',
+  styleUrls: ['./my-follow.page.scss'],
 })
-export class MyQuestionPage implements OnInit {
+export class MyFollowPage implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, private common: Common, private globalVar: globalVar) { }
   baseUrl:any;
   questionList = []
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
-    this.getMyQuestion()
+    this.getMyFollow()
   }
   doRefresh(event){
-    this.getMyQuestion()
+    this.getMyFollow()
     setTimeout(() => {
       // console.log('Async operation has ended');
       event.target.complete();
     }, 1000);
   }
-  getMyQuestion() {
-    let path = globalVar.baseUrl + "/questionList/getMyQuestion"
+  getMyFollow() {
+    let path = globalVar.baseUrl + "/questionList/getMyFollow"
     const body = new HttpParams()
       .set("wechatId", localStorage.getItem("wechatId"))
       .set("token", localStorage.getItem("token"))
