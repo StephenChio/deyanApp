@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="secondary" style="position: absolute;right: 0rem;">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<style>
+  ion-list {
+    margin-bottom: 0.5rem;
+  }
+</style>
+<ion-content color="light">
+
+  <ion-list lines="none">
+    <ion-item>
+      <h2 style="font-size: 20px;margin: 0;">{{title}}</h2>
+    </ion-item>
+    <ion-item>
+      <h2 style="font-size: 16px;margin: 0;opacity: 0.7;">查看全部{{answerNum}}个回答 > </h2>
+    </ion-item>
+    <div style="display: flex;margin-top: 1rem;background: white;">
+      <ion-segment color="primary" style="height: 3rem;" [(ngModel)]="segmentChange"
+        (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="page1" (click)="choosePage1()">
+          <ion-label style="font-size: 15px;">邀请回答</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="page2" (click)="toWriteAnswerPage()">
+          <ion-label style="font-size: 15px;">写回答</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </ion-list>
+
+  <ion-list *ngFor =  "let a of answer" lines="none">
+    <ion-item>
+      <ion-avatar style="height: 7%;width: 7%;" slot="start">
+        <img src="{{baseUrl}}/{{a.imgPath}}">
+      </ion-avatar>
+      <p style="font-size: 16px;opacity: 0.7;">{{a.userName}}</p>
+      <ion-button color="primary" slot="end" style="width: 4rem;
+      font-size: 16px;height: 2rem;"> 加好友</ion-button>
+    </ion-item>
+    <ion-item style="height: fit-content;">
+      <span style="font-size: 16px;">{{a.answerText}}</span>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer lines>
+  <ion-item>
+    <ion-button color="primary" style="width: 8rem;height: 2rem;">赞同 {{agreeNum}}</ion-button>
+    <div slot="end">
+      <ion-icon style="margin-left: 30%;" name="heart-empty"></ion-icon>
+      <p style="margin:0;font-size: 12px;">喜欢{{likeNum}}</p>
+    </div>
+    <div slot="end">
+      <ion-icon style="margin-left: 30%;" name="text"></ion-icon>
+      <p style="margin:0;font-size: 12px;">评论{{commentsNum}}</p>
+    </div>
+  </ion-item>
+</ion-footer>

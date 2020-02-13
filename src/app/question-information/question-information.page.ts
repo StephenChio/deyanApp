@@ -18,12 +18,23 @@ export class QuestionInformationPage implements OnInit {
   questionInformation: any;
   title: any;
   isFollow = false;
+  answerList :any;
+  answerNum :any;
+  id:any
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
     this.activatedRoute.queryParams.subscribe((data: any) => {
       this.getQuestionInformationById(data.id)
+      this.id = data.id;
       this.isFollowed(data.id)
     });
+  }
+  doRefresh(event) {
+    this.getQuestionInformationById(this.id)
+    setTimeout(() => {
+      // console.log('Async operation has ended');
+      event.target.complete();
+    }, 1000);
   }
   getQuestionInformationById(id: any) {
     let path = globalVar.baseUrl + "/questionList/getQuestionInformationById"
@@ -40,17 +51,23 @@ export class QuestionInformationPage implements OnInit {
         // this.common.presentAlert(data["respMsg"])
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
-          console.log(data["data"])
+          // console.log(data["data"])
           this.title = data["data"].title
           this.questionInformation = []
           this.questionInformation.push(data["data"])
+        
+          this.answerList = data["data"].answer
+          // console.log("回答")
+          console.log(this.questionInformation)
+          console.log(this.answerList)
+          this.answerNum = this.answerList.length;
         }
       },
         error => {
           this.common.presentAlert(globalVar.busyAlert)
         })
   }
-  isFollowed(id:any){
+  isFollowed(id: any) {
     let path = globalVar.baseUrl + "/followList/isFollowed"
     const body = new HttpParams()
       .set("wechatId", localStorage.getItem("wechatId"))
@@ -72,11 +89,11 @@ export class QuestionInformationPage implements OnInit {
           this.common.presentAlert(globalVar.busyAlert)
         })
   }
-  followOptions(id:any){
-    if(this.isFollow){
+  followOptions(id: any) {
+    if (this.isFollow) {
       this.disFollowQuestion(id);
     }
-    else{
+    else {
       this.followQuestion(id);
     }
   }
@@ -125,5 +142,17 @@ export class QuestionInformationPage implements OnInit {
         error => {
           this.common.presentAlert(globalVar.busyAlert)
         })
+  }
+  toWriteAnswerPage(id: any, title: any) {
+    this.router.navigate(['/write-answer-page'],
+      {
+        queryParams: { id: id, title: title }
+      })
+  }
+  toAnswerInformation(answerId:any){
+    this.router.navigate(['/answer-information'],
+      {
+        queryParams: { questionId:this.id,answerId: answerId ,title:this.title,answerNum:this.answerNum}
+      })
   }
 }

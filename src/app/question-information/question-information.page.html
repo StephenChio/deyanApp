@@ -6,16 +6,21 @@
     <ion-title>{{title}}</ion-title>
     <ion-buttons slot="secondary" style="position: absolute;right: 0rem;">
       <ion-button>
-        <ion-icon slot="icon-only"  name="search"></ion-icon>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
       <ion-button>
-        <ion-icon slot="icon-only"  name="more"></ion-icon>
+        <ion-icon slot="icon-only" name="more"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
+<style>
+  ion-list{
+    margin-bottom: 0.5rem;
+  }
+</style>
+<ion-content color="light">
+  
   <ion-list *ngFor="let q of questionInformation" lines="none">
     <ion-item>
       <ion-avatar slot="start">
@@ -32,10 +37,46 @@
     </ion-item>
     <ion-item>
       <p slot="start" style="font-size: 12px;opacity: 0.7;">{{q.answerNum}}个回答.{{q.followNum}}个关注.{{q.viewNum}}次浏览</p>
-      <ion-button *ngIf="isFollow" slot="end"  style="height: 2rem;width: 4rem;"
-      color="primary" (click)="followOptions(q.id)">已关注</ion-button>
-      <ion-button *ngIf="!isFollow" slot="end" style="height: 2rem;width: 4rem;"
-      color="primary" (click)="followOptions(q.id)">+关注问题</ion-button>
+      <ion-button *ngIf="isFollow" slot="end" style="height: 2rem;width: 4rem;" color="primary"
+        (click)="followOptions(q.id)">已关注</ion-button>
+      <ion-button *ngIf="!isFollow" slot="end" style="height: 2rem;width: 4rem;" color="primary"
+        (click)="followOptions(q.id)">+关注问题</ion-button>
     </ion-item>
+    <div style="display: flex;margin-top: 1rem;background: white;">
+      <ion-segment color="dark" style="height: 3rem;" [(ngModel)]="segmentChange" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="page1" (click)="choosePage1()">
+          <ion-label style="font-size: 15px;">邀请回答</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="page2" (click)="toWriteAnswerPage(q.id,q.title)">
+          <ion-label style="font-size: 15px;">写回答</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
   </ion-list>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+    <ion-item>
+      <ion-label>{{answerNum}}个回答</ion-label>
+    </ion-item>
+
+    <ion-list *ngFor="let answer of answerList" lines="none">
+      <ion-item>
+        <ion-avatar style="height: 7%;width: 7%;" slot="start">
+          <img src="{{baseUrl}}/{{answer.imgPath}}">
+        </ion-avatar>
+        <p style="font-size: 14px;opacity: 0.7;">{{answer.userName}}</p>
+      </ion-item>
+      <ion-item (click)="toAnswerInformation(answer.id)" style="display: inline;">
+        <span style="font-size: 14px;">{{answer.answerText.slice(0,100)}}</span>
+      </ion-item>
+      <ion-item *ngIf = "answer.answerText.length>=100" > 
+        <span style="font-size: 14px;">......</span>
+      </ion-item>
+      <ion-item>
+        <ion-card-subtitle>{{answer.likeNum}}赞同.{{answer.agreeNum}}喜欢.{{answer.commentsNum}}评论.{{answer.date}}</ion-card-subtitle>
+      </ion-item>
+    </ion-list>
+
 </ion-content>

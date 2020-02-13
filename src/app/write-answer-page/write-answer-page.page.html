@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-button (click)="answerPublish()">发布
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color = "light">
+  <ion-item style="--border-width:0;margin-bottom: 0.5rem;">
+      <p style="font-size: 17px;font-weight: 700;margin: 0;">{{title}}</p>
+  </ion-item>
+  <ion-item style="--border-width:0">
+      <ion-textarea [(ngModel)]="answerText" style = "height: 10rem;" autoGrow placeholder="详细描述你的知识，经验或见解吧~~"></ion-textarea>
+  </ion-item>
+</ion-content>

@@ -55,6 +55,8 @@ const routes: Routes = [
   { path: 'all-question-page', loadChildren: './all-question-page/all-question-page.module#AllQuestionPagePageModule' },
   { path: 'question-information', loadChildren: './question-information/question-information.module#QuestionInformationPageModule' },
   { path: 'my-follow', loadChildren: './my-follow/my-follow.module#MyFollowPageModule' },
+  { path: 'write-answer-page', loadChildren: './write-answer-page/write-answer-page.module#WriteAnswerPagePageModule' },
+  { path: 'answer-information', loadChildren: './answer-information/answer-information.module#AnswerInformationPageModule' },
 ];
 @NgModule({
   imports: [

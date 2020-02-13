@@ -17,7 +17,7 @@ export class SignSettingPage implements OnInit {
     this.sign = localStorage.getItem("sign")
   }
   updateSign(){
-    let path = globalVar.baseUrl + "/userInfo/updateSex"
+    let path = globalVar.baseUrl + "/userInfo/updateSign"
     const body = new HttpParams()
       .set("wechatId", localStorage.getItem("wechatId"))
       .set("token", localStorage.getItem("token"))
