@@ -48,12 +48,21 @@
       </ion-avatar>
       <p style="font-size: 16px;opacity: 0.7;">{{a.userName}}</p>
       <ion-button color="primary" slot="end" style="width: 4rem;
-      font-size: 16px;height: 2rem;"> 加好友</ion-button>
+      font-size: 16px;height: 2rem;" [disabled] = "isFriendFlag"> 加好友</ion-button>
     </ion-item>
     <ion-item style="height: fit-content;">
       <span style="font-size: 16px;">{{a.answerText}}</span>
     </ion-item>
   </ion-list>
+  <ion-fab horizontal="end" vertical="center" slot="fixed">
+    <ion-fab-button color="light" (click)="preAnswer()">
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="light" (click)="nextAnswer()">
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+    
 
 </ion-content>
 

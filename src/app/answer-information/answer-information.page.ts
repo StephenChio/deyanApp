@@ -21,6 +21,9 @@ export class AnswerInformationPage implements OnInit {
   agreeNum:any
   likeNum:any
   commentsNum:any
+  nextAnswerId:any;
+  preAnswerId:any;
+  isFriendFlag = false;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
     this.activatedRoute.queryParams.subscribe((data: any) => {
@@ -32,9 +35,50 @@ export class AnswerInformationPage implements OnInit {
       this.getAnswerById(this.answerId)
     });
   }
+  isFriend(fWechatId:any){
+    let path = globalVar.baseUrl + "/addressList/isFriend"
+    const body = new HttpParams()
+      .set("wechatId",localStorage.getItem("wechatId"))
+      .set("fWechatId", fWechatId)
+      .set("token", localStorage.getItem("token"))
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
+        // this.common.presentAlert(data["respMsg"])
+        localStorage.setItem("token", data["token"]);
+        if (data["respCode"] == "00") {
+          this.isFriendFlag = data["data"];
+          console.log(this.isFriendFlag)
+        }
+      },
+        error => {
+          this.common.presentAlert(globalVar.busyAlert)
+      })
+  }
+  nextAnswer(){
+
+    if(this.common.isEmpty(this.nextAnswerId)){
+      this.common.presentAlert("已经是最后一个答案了")
+    }
+    else{
+      this.getAnswerById(this.nextAnswerId)
+    }
+  }
+  preAnswer(){
+    if(this.common.isEmpty(this.preAnswerId)){
+      this.common.presentAlert("已经是第一个答案了")
+    }
+    else{
+      this.getAnswerById(this.preAnswerId)
+    }
+  }
   getAnswerById(id:any){
     let path = globalVar.baseUrl + "/answerList/getAnswerById"
     const body = new HttpParams()
+      .set("questionId",this.questionId)
       .set("id", id)
       .set("token", localStorage.getItem("token"))
     let httpOptions = {
@@ -51,7 +95,9 @@ export class AnswerInformationPage implements OnInit {
           this.agreeNum = data["data"].agreeNum
           this.commentsNum = data["data"].commentsNum
           this.likeNum = data["data"].likeNum
-          // console.log(this.answer)
+          this.nextAnswerId = data["data"].nextAnswerId
+          this.preAnswerId = data["data"].preAnswerId
+          this.isFriend(data["data"].wechatId)
         }
       },
         error => {

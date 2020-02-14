@@ -16,6 +16,14 @@ export class Common {
   log(msg: any){
     console.log(msg)
   }
+  isEmpty(T:any):boolean{
+    if(T==undefined || T ==null || T == "" ){
+      return true;
+    }
+    else{
+      return false
+    }
+  }
 
   async presentAlert(msg: any) {
     const alert = await this.alertController.create({
