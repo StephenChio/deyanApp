@@ -29,12 +29,12 @@
   <p style="color:white;" *ngIf="text.length>10">......</p>
   </div>
   <ion-item color="dark">
-    <ion-icon (click)="clickLike()" name="heart-empty"></ion-icon>
+    <ion-icon (click)="clickLike()" name="heart"></ion-icon>
     <ion-label style="max-width: fit-content;">赞</ion-label>
     <ion-icon (click)="showDetail()" name="text"></ion-icon>
     <ion-label style="max-width: fit-content;">评论</ion-label>
 
-    <ion-icon (click)="showDetail()" slot="end" name="heart-empty"></ion-icon>
+    <ion-icon (click)="showDetail()" slot="end" name="heart"></ion-icon>
     <ion-icon (click)="showDetail()" slot="end" name="text"></ion-icon>
   </ion-item>
 </ion-footer>

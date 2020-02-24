@@ -24,6 +24,7 @@ export class AnswerInformationPage implements OnInit {
   nextAnswerId:any;
   preAnswerId:any;
   isFriendFlag = false;
+  isLike = false;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
     this.activatedRoute.queryParams.subscribe((data: any) => {
@@ -34,6 +35,29 @@ export class AnswerInformationPage implements OnInit {
       // console.log(this.answerId)
       this.getAnswerById(this.answerId)
     });
+  }
+  judgeIsLike(answerId:any){
+    let path = globalVar.baseUrl + "/answerLikeList/judgeIsLike"
+    const body = new HttpParams()
+      .set("wechatId",localStorage.getItem("wechatId"))
+      .set("answerId", answerId)
+      .set("token", localStorage.getItem("token"))
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
+        // this.common.presentAlert(data["respMsg"])
+        localStorage.setItem("token", data["token"]);
+        if (data["respCode"] == "00") {
+          this.isLike = data["data"];
+          // this.common.presentAlert(this.isLike)
+        }
+      },
+        error => {
+          this.common.presentAlert(globalVar.busyAlert)
+      })
   }
   isFriend(fWechatId:any){
     let path = globalVar.baseUrl + "/addressList/isFriend"
@@ -51,7 +75,7 @@ export class AnswerInformationPage implements OnInit {
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.isFriendFlag = data["data"];
-          console.log(this.isFriendFlag)
+          // console.log(this.isFriendFlag)
         }
       },
         error => {
@@ -97,7 +121,56 @@ export class AnswerInformationPage implements OnInit {
           this.likeNum = data["data"].likeNum
           this.nextAnswerId = data["data"].nextAnswerId
           this.preAnswerId = data["data"].preAnswerId
+          this.answerId = data["data"].id
           this.isFriend(data["data"].wechatId)
+          this.judgeIsLike(this.answerId)
+        }
+      },
+        error => {
+          this.common.presentAlert(globalVar.busyAlert)
+      })
+  }
+
+  clickLike(){
+    let path = globalVar.baseUrl + "/answerLikeList/clickLike"
+    const body = new HttpParams()
+      .set("wechatId",localStorage.getItem("wechatId"))
+      .set("answerId", this.answerId)
+      .set("token", localStorage.getItem("token"))
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
+        // this.common.presentAlert(data["respMsg"])
+        localStorage.setItem("token", data["token"]);
+        if (data["respCode"] == "00") {
+          this.isLike = true;
+          this.likeNum = Number(this.likeNum) + 1
+        }
+      },
+        error => {
+          this.common.presentAlert(globalVar.busyAlert)
+      })
+  }
+  clickDisLike(){
+    let path = globalVar.baseUrl + "/answerLikeList/clickDisLike"
+    const body = new HttpParams()
+      .set("wechatId",localStorage.getItem("wechatId"))
+      .set("answerId", this.answerId)
+      .set("token", localStorage.getItem("token"))
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
+        // this.common.presentAlert(data["respMsg"])
+        localStorage.setItem("token", data["token"]);
+        if (data["respCode"] == "00") {
+          this.isLike = false;
+          this.likeNum = Number(this.likeNum) - 1
         }
       },
         error => {
@@ -108,6 +181,12 @@ export class AnswerInformationPage implements OnInit {
     this.router.navigate(['/write-answer-page'],
     {
       queryParams: { id: this.questionId, title: this.title }
+    })
+  }
+  getQuestionInformation(){
+    this.router.navigate(['/question-information'],
+    {
+      queryParams: { id: this.questionId }
     })
   }
 }
