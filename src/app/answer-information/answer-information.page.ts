@@ -18,13 +18,14 @@ export class AnswerInformationPage implements OnInit {
   questionId:any;
   baseUrl:any;
   answer = []
-  agreeNum:any
+  collectNum:any
   likeNum:any
   commentsNum:any
   nextAnswerId:any;
   preAnswerId:any;
   isFriendFlag = false;
   isLike = false;
+  isCollect = false;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
     this.activatedRoute.queryParams.subscribe((data: any) => {
@@ -59,7 +60,38 @@ export class AnswerInformationPage implements OnInit {
           this.common.presentAlert(globalVar.busyAlert)
       })
   }
+  judgeIsCollect(answerId:any){
+    let path = globalVar.baseUrl + "/collectAnswerList/judgeIsCollect"
+    const body = new HttpParams()
+      .set("wechatId",localStorage.getItem("wechatId"))
+      .set("questionId",this.questionId)
+      .set("answerId", answerId)
+      .set("token", localStorage.getItem("token"))
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
+        // this.common.presentAlert(data["respMsg"])
+        localStorage.setItem("token", data["token"]);
+        if (data["respCode"] == "00") {
+          this.isCollect = data["data"];
+          // this.common.presentAlert(this.isLike)
+        }
+      },
+        error => {
+          this.common.presentAlert(globalVar.busyAlert)
+      })
+  }
+  comment() {
+    this.common.presentAlert(globalVar.comingSoon)
+  }
   isFriend(fWechatId:any){
+    if(fWechatId == localStorage.getItem("wechatId")){
+      this.isFriendFlag = true
+      return;
+    }
     let path = globalVar.baseUrl + "/addressList/isFriend"
     const body = new HttpParams()
       .set("wechatId",localStorage.getItem("wechatId"))
@@ -111,12 +143,12 @@ export class AnswerInformationPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
-        // this.common.presentAlert(data["respMsg"])
+        this.common.log(data["data"])
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.answer = []
           this.answer.push(data["data"])
-          this.agreeNum = data["data"].agreeNum
+          this.collectNum = data["data"].collectNum
           this.commentsNum = data["data"].commentsNum
           this.likeNum = data["data"].likeNum
           this.nextAnswerId = data["data"].nextAnswerId
@@ -124,6 +156,7 @@ export class AnswerInformationPage implements OnInit {
           this.answerId = data["data"].id
           this.isFriend(data["data"].wechatId)
           this.judgeIsLike(this.answerId)
+          this.judgeIsCollect(this.answerId)
         }
       },
         error => {
@@ -188,5 +221,81 @@ export class AnswerInformationPage implements OnInit {
     {
       queryParams: { id: this.questionId }
     })
+  }
+  searchFriend(wechatId:any) {
+    let path = globalVar.baseUrl + "/userInfo/searchFriend"
+
+    const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
+      .set("searchContext", wechatId)
+      .set("token", localStorage.getItem("token"))
+    // console.log(body);
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
+        localStorage.setItem("token", data["token"]);
+        if (data["respCode"] == "00") {
+          if (data["data"].length > 0) {
+            this.router.navigate(['/friend-card'],
+              {
+                queryParams: { wechatId: data["data"][0].wechatId, userName: data["data"][0].userName, imgPath: data["data"][0].imgPath }
+              })
+          }
+        }
+      },
+        error => {
+          this.common.presentAlert(globalVar.busyAlert)
+        });
+  }
+  collectAnswer(){
+    let path = globalVar.baseUrl + "/collectAnswerList/collectAnswer"
+    const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
+      .set("questionId",this.questionId)
+      .set("answerId", this.answerId)
+      .set("token", localStorage.getItem("token"))
+    // console.log(body);
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
+        localStorage.setItem("token", data["token"]);
+        if (data["respCode"] == "00") {
+          this.isCollect = true;
+          this.collectNum = Number(this.collectNum) + 1
+        }
+      },
+        error => {
+          this.common.presentAlert(globalVar.busyAlert)
+      });
+  }
+  disCollectAnswer(){
+    let path = globalVar.baseUrl + "/collectAnswerList/disCollectAnswer"
+    const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
+      .set("questionId",this.questionId)
+      .set("answerId", this.answerId)
+      .set("token", localStorage.getItem("token"))
+    // console.log(body);
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
+        localStorage.setItem("token", data["token"]);
+        if (data["respCode"] == "00") {
+          this.isCollect = false;
+          this.collectNum = Number(this.collectNum) - 1
+        }
+      },
+        error => {
+          this.common.presentAlert(globalVar.busyAlert)
+      });
   }
 }

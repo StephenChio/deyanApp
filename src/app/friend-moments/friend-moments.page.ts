@@ -45,7 +45,7 @@ export class FriendMomentsPage implements OnInit {
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.Moments = data["data"];
-          console.log(this.Moments)
+          // console.log(this.Moments)
           this.imgPath = globalVar.baseUrl + "/" + data["data"][0].imgPath;
           this.userName = data["data"][0].userName;
           this.sign = data["data"][0].sign;

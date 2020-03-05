@@ -57,9 +57,7 @@ export class QuestionInformationPage implements OnInit {
           this.questionInformation.push(data["data"])
         
           this.answerList = data["data"].answer
-          // console.log("回答")
-          console.log(this.questionInformation)
-          console.log(this.answerList)
+        
           this.answerNum = this.answerList.length;
         }
       },

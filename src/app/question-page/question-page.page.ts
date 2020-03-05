@@ -34,8 +34,9 @@ export class QuestionPagePage implements OnInit {
       this.common.presentAlert("请选择一个语种提问")
       return
     }
-
-
+    if(this.common.isEmpty(this.explainText)){
+      this.explainText = ""
+    }
     let path = globalVar.baseUrl + "/questionList/questionPublish"
     const body = new HttpParams()
       .set("wechatId", localStorage.getItem("wechatId"))

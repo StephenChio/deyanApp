@@ -30,10 +30,10 @@
     </ion-item>
     <div style="display: flex;margin-top: 1rem;background: white;">
       <ion-segment color="primary" style="height: 3rem;">
-        <ion-segment-button value="page1" (click)="choosePage1()">
+        <ion-segment-button >
           <ion-label style="font-size: 15px;">邀请回答</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="page2" (click)="toWriteAnswerPage()">
+        <ion-segment-button  (click)="toWriteAnswerPage()">
           <ion-label style="font-size: 15px;">写回答</ion-label>
         </ion-segment-button>
       </ion-segment>
@@ -47,7 +47,7 @@
       </ion-avatar>
       <p style="font-size: 16px;opacity: 0.7;">{{a.userName}}</p>
       <ion-button color="primary" slot="end" style="width: 4rem;
-      font-size: 16px;height: 2rem;" [disabled] = "isFriendFlag"> 加好友</ion-button>
+      font-size: 16px;height: 2rem;" [disabled] = "isFriendFlag" (click)="searchFriend(a.wechatId)"> 加好友</ion-button>
     </ion-item>
     <ion-item style="height: fit-content;">
       <span style="font-size: 16px;">{{a.answerText}}</span>
@@ -69,11 +69,15 @@
   <ion-item>
     <ion-button *ngIf = "!isLike" (click)="clickLike()" color="primary" style="width: 8rem;height: 2rem;">赞同 {{likeNum}}</ion-button>
     <ion-button *ngIf = "isLike" (click)="clickDisLike()" color="primary" style="width: 8rem;height: 2rem;">已赞同 {{likeNum}}</ion-button>
-    <div slot="end">
+    <div *ngIf = "!isCollect" slot="end" (click)="collectAnswer()">
       <ion-icon style="margin-left: 30%;" name="heart-empty"></ion-icon>
-      <p style="margin:0;font-size: 12px;">收藏{{agreeNum}}</p>
+      <p style="margin:0;font-size: 12px;">收藏{{collectNum}}</p>
     </div>
-    <div slot="end">
+    <div *ngIf = "isCollect" slot="end" (click)="disCollectAnswer()">
+      <ion-icon style="margin-left: 30%;" name="heart-empty"></ion-icon>
+      <p style="margin:0;font-size: 12px;">已收藏{{collectNum}}</p>
+    </div>
+    <div slot="end" (click)="comment()">
       <ion-icon style="margin-left: 30%;" name="chatbubble-outline"></ion-icon>
       <p style="margin:0;font-size: 12px;">评论{{commentsNum}}</p>
     </div>

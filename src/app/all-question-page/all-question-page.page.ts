@@ -81,7 +81,7 @@ export class AllQuestionPagePage implements OnInit {
         // this.common.presentAlert(data["respMsg"])
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
-          console.log(data["data"])
+          // console.log(data["data"])
           this.allQuestionList = data["data"]
         }
       },
@@ -103,7 +103,7 @@ export class AllQuestionPagePage implements OnInit {
         // this.common.presentAlert(data["respMsg"])
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
-          console.log(data["data"])
+          // console.log(data["data"])
           this.questionList = data["data"]
         }
       },
