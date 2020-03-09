@@ -22,9 +22,10 @@ export class MomentsPage implements OnInit {
   backgroundImg: string;
   userName: any;
   wechatId: any;
-
+  resourceUrl:string;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
+    this.resourceUrl = globalVar.resourceUrl;
     this.userName = window.localStorage.getItem("userName");
     this.wechatId = window.localStorage.getItem("wechatId");
     this.imgPath = localStorage.getItem("imgPath")

@@ -23,8 +23,10 @@ export class Tab1Page implements OnInit {
   searchText: any;
   removeMsg = "删除"
   isMark = true;
+  resourceUrl:string
   ngOnInit() {
     var _this = this
+    this.resourceUrl = globalVar.resourceUrl;
     this.baseUrl = globalVar.baseUrl;
     this.chatsGroup = JSON.parse(localStorage.getItem(localStorage.getItem("wechatId") + "chats"))
     var remarkList = JSON.parse(localStorage.getItem(localStorage.getItem("wechatId") + "remarkList"))
@@ -37,6 +39,7 @@ export class Tab1Page implements OnInit {
     }
     localStorage.setItem(localStorage.getItem("wechatId") + "chats", JSON.stringify(this.chatsGroup))
     const url = "/websocket/socketServer?WS_NAME=tab1" +"and"+ localStorage.getItem("wechatId")
+    console.log(this.websocket)
     if (this.websocket == null) {
       this.websocket = this.ws.createObservableSocket(url)
       this.websocket.onmessage = function (event: any) {

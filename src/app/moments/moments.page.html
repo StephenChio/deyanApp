@@ -63,14 +63,14 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <img class="titlePicture" (click)="selectBackground()" src="{{baseUrl}}/{{backgroundImg}}">
-  <img class="head" (click)="showInfo(wechatId,userName,imgPath)" src="{{baseUrl}}/{{imgPath}}">
+  <img class="titlePicture" (click)="selectBackground()" src="{{resourceUrl}}/{{backgroundImg}}">
+  <img class="head" (click)="showInfo(wechatId,userName,imgPath)" src="{{resourceUrl}}/{{imgPath}}">
   <div style="position: absolute; top: 60%;">
     <ion-list *ngFor="let moments of Moments">
       <div *ngIf="moments.text || moments.pictureImgPath || moments.videoPath">
         <ion-item class="box">
           <img class="fhead" (click)="showInfo(moments.wechatId,moments.userName,moments.imgPath,moments.remarkName)"
-            src="{{baseUrl}}/{{moments.imgPath}}">
+            src="{{resourceUrl}}/{{moments.imgPath}}">
           <div class="context">
             <ion-card-subtitle *ngIf="moments.remarkName==null" color="primary"
               (click)="showInfo(moments.wechatId,moments.userName,moments.imgPath)">
@@ -87,7 +87,7 @@
                 style="margin:0.15rem;display:inline-block;width:90px;height:90px;">
                 <img
                   (click)="showPicInfo(moments.id,moments.wechatId,moments.pictureId,moments.pictureImgPath,i,moments.text,moments.createTime)"
-                  style="width:90px;height:90px;object-fit: cover;" src="{{baseUrl}}/{{moments.pictureImgPath[i]}}">
+                  style="width:90px;height:90px;object-fit: cover;" src="{{resourceUrl}}/{{moments.pictureImgPath[i]}}">
               </div>
             </div>
             <div style="display: flex;margin-top: 0.5rem;margin-bottom: 0.5rem;">

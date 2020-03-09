@@ -31,7 +31,7 @@
 <ion-content color="light">
   <ion-item>
     <ion-card style="display:flex;box-shadow:0 4px 16px rgba(0,0,0,0);" class="welcome-card">
-      <img class="img" src="{{baseUrl}}/{{imgPath}}" alt="" />
+      <img class="img" src="{{resourceUrl}}/{{imgPath}}" alt="" />
       <ion-card-header class="card-header">
         <ion-card-title style="margin-bottom: 1rem;">{{name}}</ion-card-title>
         <ion-card-subtitle *ngIf="userName">昵称:{{userName}}</ion-card-subtitle>
@@ -46,7 +46,7 @@
     <ion-item [routerLink]="['/friend-moments']" [queryParams]="{wechatId:wechatId}">
       <ion-label slot="start" style="max-width: 4rem;">动态</ion-label>
       <div *ngFor="let img of Img4" style="width: 80px;height: 80px;margin: 0.5rem 0.25rem;">
-        <img style="width: 80px;height: 80px;object-fit: cover;" src="{{baseUrl}}/{{img}}">
+        <img style="width: 80px;height: 80px;object-fit: cover;" src="{{resourceUrl}}/{{img}}">
       </div>
     </ion-item>
     <ion-item *ngIf="type=='发消息' && flag " [routerLink]="['/social-information']">

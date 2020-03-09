@@ -24,7 +24,7 @@
   <ion-list *ngFor="let q of questionInformation" lines="none">
     <ion-item>
       <ion-avatar slot="start">
-        <img src="{{baseUrl}}/{{q.imgPath}}">
+        <img src="{{resourceUrl}}/{{q.imgPath}}">
       </ion-avatar>
       <ion-label style="height: 2rem;">
         <h2 style="font-size: 12px;">{{q.userName}}</h2>
@@ -66,7 +66,7 @@
     <ion-list *ngFor="let answer of answerList" lines="none">
       <ion-item>
         <ion-avatar style="height: 7%;width: 7%;" slot="start">
-          <img src="{{baseUrl}}/{{answer.imgPath}}">
+          <img src="{{resourceUrl}}/{{answer.imgPath}}">
         </ion-avatar>
         <p style="font-size: 14px;opacity: 0.7;">{{answer.userName}}</p>
       </ion-item>

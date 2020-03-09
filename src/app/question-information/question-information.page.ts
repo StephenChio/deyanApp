@@ -21,7 +21,9 @@ export class QuestionInformationPage implements OnInit {
   answerList :any;
   answerNum :any;
   id:any
+  resourceUrl:string
   ngOnInit() {
+    this.resourceUrl = globalVar.resourceUrl;
     this.baseUrl = globalVar.baseUrl;
     this.activatedRoute.queryParams.subscribe((data: any) => {
       this.getQuestionInformationById(data.id)

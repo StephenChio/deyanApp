@@ -16,7 +16,7 @@ export class WebSocketService {
   }
   createObservableSocket(url:string):WebSocket{
     this.ws = new WebSocket(this.websocketUrl+url);
-    // this.presentAlert("ws连接成功")
+    console.log(this.websocketUrl+url+"连接成功")
     return this.ws;
   }
 }

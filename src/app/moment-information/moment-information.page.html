@@ -19,7 +19,7 @@
     <div *ngIf="moments.text || moments.pictureImgPath || moments.videoPath">
       <ion-item class="box">
         <img class="fhead" (click)="showInfo(moments.wechatId,moments.userName,moments.imgPath,moments.remarkName)"
-          src="{{baseUrl}}/{{moments.imgPath}}">
+          src="{{resourceUrl}}/{{moments.imgPath}}">
         <div class="context">
           <ion-card-subtitle *ngIf="moments.remarkName==null" color="primary"
             (click)="showInfo(moments.wechatId,moments.userName,moments.imgPath)">
@@ -36,7 +36,7 @@
               style="margin-left: 0.25rem;margin-right: 0.25rem;display:inline-block;width:90px;height:90px;">
               <img
                 (click)="showPicInfo(moments.id,moments.wechatId,moments.pictureId,moments.pictureImgPath,i,moments.text,moments.createTime)"
-                style="width:90px;height:90px;object-fit: cover;" src="{{baseUrl}}/{{moments.pictureImgPath[i]}}">
+                style="width:90px;height:90px;object-fit: cover;" src="{{resourceUrl}}/{{moments.pictureImgPath[i]}}">
             </div>
           </div>
           <div style="display: flex;margin-bottom: 0.5rem;">
@@ -70,7 +70,7 @@
           <div *ngIf="null !== moments.likeName" style="display: flex;">
             <ion-icon style="height: 2.3rem;margin-right: 0.25rem;" color="primary" name="heart-empty"></ion-icon>
             <div *ngFor="let name of moments.likeName">
-              <img style="height: 2rem;width: 2rem;margin: 0.15rem;" src="{{baseUrl}}/{{name.imgPath}}"
+              <img style="height: 2rem;width: 2rem;margin: 0.15rem;" src="{{resourceUrl}}/{{name.imgPath}}"
                 (click)="showInfo(name.wechatId,name.userName,name.imgPath,name.remarkName)">
               <!-- <ion-card-subtitle *ngIf="name.remarkName" color="primary" style="font-size: 13px;margin-right: 0.5rem;" (click)="showInfo(name.wechatId,name.userName,name.imgPath,name.remarkName)">{{name.remarkName}}</ion-card-subtitle>
                   <ion-card-subtitle *ngIf="name.remarkName==null" color="primary" style="font-size: 13px;margin-right: 0.5rem;" (click)="showInfo(name.wechatId,name.userName,name.imgPath)">{{name.userName}}</ion-card-subtitle> -->

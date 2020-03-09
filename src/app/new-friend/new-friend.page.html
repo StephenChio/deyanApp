@@ -16,7 +16,7 @@
     <ion-item *ngFor="let item of newFriend" [routerLink]="['/friend-card']"
       [queryParams]="{wechatId:item.wechatId,imgPath:item.imgPath,userName:item.userName,type:'acceptConfirm'}">
       <ion-avatar slot="start">
-        <img style = "border-radius: 5px;" src="{{baseUrl}}/{{item.imgPath}}">
+        <img style = "border-radius: 5px;" src="{{resourceUrl}}/{{item.imgPath}}">
       </ion-avatar>
       <ion-label>
         <h2>{{item.userName}}</h2>

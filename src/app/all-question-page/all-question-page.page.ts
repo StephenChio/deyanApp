@@ -16,6 +16,7 @@ export class AllQuestionPagePage implements OnInit {
   questionList = []
   allQuestionList = []
   baseUrl:any;
+  resourceUrl:any;
   segmentChange = "page1";
   slidesChange = "page1"
   sliderOptions = {
@@ -25,6 +26,7 @@ export class AllQuestionPagePage implements OnInit {
 
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
+    this.resourceUrl = globalVar.resourceUrl;
     this.getAllQuestionListByLanguageOption();
   }
   segmentChanged(event){

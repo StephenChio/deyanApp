@@ -18,9 +18,11 @@ export class FriendMomentsPage implements OnInit {
   imgPath: string;
   backgroundImg: string;
   baseUrl: string;
+  resourceUrl:string;
   sign:any;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
+    this.resourceUrl = globalVar.resourceUrl;
     this.activatedRoute.queryParams.subscribe((data: any) => {
       this.wechatId = data.wechatId;  //上个页面传过来的值  
       this.getFriendMoments(this.wechatId);

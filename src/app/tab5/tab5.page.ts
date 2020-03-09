@@ -15,7 +15,9 @@ export class Tab5Page implements OnInit {
   imgPath:any;
   baseUrl:any;
   date:any;
+  resourceUrl:string
   ngOnInit() {
+    this.resourceUrl = globalVar.resourceUrl;
     this.baseUrl = globalVar.baseUrl;
     this.imgPath = localStorage.getItem("imgPath");
     this.getDate();

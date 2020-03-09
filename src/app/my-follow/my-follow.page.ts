@@ -40,7 +40,7 @@ export class MyFollowPage implements OnInit {
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.questionList = data["data"]
-          console.log(this.questionList)
+          // console.log(this.questionList)
         }
       },
         error => {

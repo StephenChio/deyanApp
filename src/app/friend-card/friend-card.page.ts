@@ -15,6 +15,7 @@ export class FriendCardPage implements OnInit {
   public imgPath: string;
   public type = "添加好友"
   public baseUrl: string;
+  resourceUrl:string
   public remarkName: string;
   public Img4: any;
   public name: any;
@@ -43,6 +44,7 @@ export class FriendCardPage implements OnInit {
         this.userName = null
       }
       this.baseUrl = globalVar.baseUrl;
+      this.resourceUrl =globalVar.baseUrl;
       if (data.type == "acceptConfirm") {
         this.type = "确认添加";
       }

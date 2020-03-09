@@ -20,9 +20,11 @@ export class Tab2Page implements OnInit {
   searchFriendList = [];
   remarklist = [];
   removeMsg = "删除"
+  resourceUrl:string;
   constructor(private router: Router, private globalVar: globalVar, private http: HttpClient, private common: Common, private ws: WebSocketService) { }
   ngOnInit() {
     var _this = this;
+    this.resourceUrl = globalVar.resourceUrl;
     this.baseUrl = globalVar.baseUrl;
     // this.getFriendList()
     const url = "/websocket/socketServer?WS_NAME=tab2" + "and" + localStorage.getItem("wechatId")

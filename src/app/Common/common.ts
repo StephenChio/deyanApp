@@ -1,26 +1,60 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { callbackify } from 'util';
-
+import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
+import { globalVar } from 'src/globalVar';
+import { Md5 } from "ts-md5";
 
 
 @Injectable()
 export class Common {
-  constructor(private alertController: AlertController) {
+  constructor(private Md5: Md5, private globalVar: globalVar, private http: HttpClient, private alertController: AlertController) {
 
+  }
+  /**
+   * 
+   * @param password 加盐
+   * @param salt 
+   */
+  addSalt(password: any, salt: any): any {
+    return Md5.hashStr(password + salt);
+  }
+  /**
+   * 
+   * @param phone 获得盐
+   */
+  getSalt(phone: any) {
+    let path = globalVar.baseUrl + "/idSalt/getSalt"
+    const body = new HttpParams()
+      .set("phone", phone)
+    let httpOptions = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+    this.http.post(path, body, httpOptions)
+      .subscribe(data => {
+        if (data["respCode"] == "00") {
+          localStorage.setItem("salt",data["data"]);
+        }
+        else {
+          this.presentAlert(data["respMsg"]);
+        }
+      },
+        error => {
+          this.presentAlert(globalVar.busyAlert);
+        }
+      );
   }
   /**
    * 
    * @param msg 通用弹出通知组件
    */
-  log(msg: any){
+  log(msg: any) {
     console.log(msg)
   }
-  isEmpty(T:any):boolean{
-    if(T==undefined || T ==null || T == "" ){
+  isEmpty(T: any): boolean {
+    if (T == undefined || T == null || T == "") {
       return true;
     }
-    else{
+    else {
       return false
     }
   }
@@ -70,10 +104,10 @@ export class Common {
     }
     return pwd;
   }
-   /**
-   * 
-   * @param msg 退出账号
-   */
+  /**
+  * 
+  * @param msg 退出账号
+  */
   async quit(msg: any) {
     const alert = await this.alertController.create({
       header: '确认',
@@ -98,6 +132,7 @@ export class Common {
           localStorage.removeItem("position");
           localStorage.removeItem("sign")
           localStorage.removeItem("token");
+          localStorage.removeItem("salt");
           window.location.href = "login"
         }
       }]

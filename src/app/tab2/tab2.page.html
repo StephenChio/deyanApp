@@ -43,7 +43,7 @@
           <ion-item [routerLink]="['/friend-card']"
             [queryParams]="{wechatId:item.wechatId,userName:item.userName,imgPath:item.imgPath,remarkName:item.remarkName,type:'sendMsg'}">
             <ion-avatar slot="start">
-              <img style="height: 40px;width: 40px; border-radius: 5px;" src="{{baseUrl}}/{{item.imgPath}}">
+              <img style="height: 40px;width: 40px; border-radius: 5px;" src="{{resourceUrl}}/{{item.imgPath}}">
             </ion-avatar>
             <ion-label style="height: 2.3rem;">
               <h2 *ngIf="item.remarkName">{{item.remarkName}}</h2>
@@ -66,7 +66,7 @@
       <ion-item [routerLink]="['/friend-card']"
         [queryParams]="{wechatId:item.wechatId,imgPath:item.imgPath,userName:item.userName,remarkName:item.remarkName,type:'sendMsg'}">
         <ion-avatar slot="start">
-          <img style="height: 40px;width: 40px; border-radius: 5px;" src="{{baseUrl}}/{{item.imgPath}}">
+          <img style="height: 40px;width: 40px; border-radius: 5px;" src="{{resourceUrl}}/{{item.imgPath}}">
         </ion-avatar>
         <ion-label style="height: 2.3rem;">
           <h2 *ngIf="item.remarkName">{{item.remarkName}}</h2>

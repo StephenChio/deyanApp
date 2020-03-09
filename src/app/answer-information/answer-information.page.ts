@@ -26,8 +26,10 @@ export class AnswerInformationPage implements OnInit {
   isFriendFlag = false;
   isLike = false;
   isCollect = false;
+  resourceUrl:string;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
+    this.resourceUrl = globalVar.resourceUrl
     this.activatedRoute.queryParams.subscribe((data: any) => {
       this.answerId=data.answerId
       this.title = data.title
@@ -143,7 +145,7 @@ export class AnswerInformationPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
-        this.common.log(data["data"])
+        // this.common.log(data["data"])
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.answer = []

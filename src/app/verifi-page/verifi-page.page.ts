@@ -22,6 +22,7 @@ export class VerifiPagePage implements OnInit {
   useVerifiCode = true;
   usePassword = false;
   password: any;
+  salt:any;
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((data: any) => {
       // console.log(data.phone)
@@ -83,6 +84,7 @@ export class VerifiPagePage implements OnInit {
         return;
       }
       loginType = "password"
+      this.password  = this.common.addSalt(this.password,localStorage.getItem("salt"));
     }
     let path = globalVar.baseUrl + "/login"
     const body = new HttpParams()

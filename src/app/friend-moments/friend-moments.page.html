@@ -56,7 +56,7 @@
             <div *ngIf="null !== moments.pictureImgPath" style="display: flex;flex-wrap:wrap;width:80px;height:80px;">
               <div *ngFor="let pictureImgPath of moments.pictureImgPath.slice(0,4);index as i"
                 style="display:inline-block;width:40px;height:40px;">
-                <img style="width:40px;height:40px;object-fit: cover;" src="{{baseUrl}}/{{moments.pictureImgPath[i]}}">
+                <img style="width:40px;height:40px;object-fit: cover;" src="{{resourceUrl}}/{{moments.pictureImgPath[i]}}">
               </div>
             </div>
             <div style="margin-left: 0.5rem;">

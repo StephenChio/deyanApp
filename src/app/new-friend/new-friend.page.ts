@@ -13,7 +13,9 @@ export class NewFriendPage implements OnInit {
   constructor(private globalVar: globalVar, private http: HttpClient, private common: Common) { }
   newFriend = []
   baseUrl: string;
+  resouceUrl:string
   ngOnInit() {
+    this.resourceUrl = globalVar.resourceUrl;
     this.baseUrl = globalVar.baseUrl;
     this.getNewFriend()
   }

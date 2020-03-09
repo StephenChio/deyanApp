@@ -21,9 +21,11 @@ export class ChatPagePage implements OnInit {
   websocket = null;
   chats = []
   baseUrl: string;
+  resourceUrl:string;
   ngOnInit() {
     var _this = this;
     this.baseUrl = globalVar.baseUrl;
+    this.resourceUrl = globalVar.resourceUrl;
     this.activatedRoute.queryParams.subscribe((data: any) => {
       this.imgPath = data.imgPath;
       this.fUserName = data.name;

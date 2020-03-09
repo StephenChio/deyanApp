@@ -15,7 +15,7 @@ export class ChatInfoPage implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((data: any) => {
       // console.log(data)
-      this.imgPath = globalVar.baseUrl+"/"+data.imgPath;
+      this.imgPath = globalVar.resourceUrl+"/"+data.imgPath;
       this.fUserName = data.fUserName;
     });
   }

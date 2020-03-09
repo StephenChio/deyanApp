@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export class globalVar {
 // public static baseUrl = "http://106.13.211.195:8235"
 public static baseUrl = "http://localhost:8235"
+public static resourceUrl = "http://localhost:8080"
 public static version = "1.0"
 public static busyAlert = "服务器繁忙,请重试"
 public static loginTimeOutAlert = "登陆超时,请重新登陆"

@@ -17,8 +17,10 @@ export class MomentInformationPage implements OnInit {
   baseUrl: any
   wechatId: any
   fWechatId: any
+  resourceUrl:string;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
+    this.resourceUrl = globalVar.resourceUrl;
     this.wechatId = localStorage.getItem("wechatId");
     this.activatedRoute.queryParams.subscribe((data: any) => {
       this.getMomentById(data.id)

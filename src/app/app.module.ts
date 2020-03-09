@@ -19,6 +19,7 @@ import { QuitGuardGuard } from './guard/quit-guard.guard';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { NativeKeyboard } from '@ionic-native/native-keyboard/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Md5 } from 'ts-md5';
 @NgModule({
   declarations: [AppComponent,PopComponentComponent,CommentComponentComponent],
   entryComponents: [PopComponentComponent,CommentComponentComponent],
@@ -33,6 +34,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     ImagePicker,
     globalVar,
     Common,
+    Md5,
     Popover,
     Keyboard,
     NativeKeyboard,

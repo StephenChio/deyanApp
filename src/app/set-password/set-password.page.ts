@@ -49,9 +49,16 @@ export class SetPasswordPage implements OnInit {
       return false;
     }
     let path = globalVar.baseUrl + "/userInfo/updatePassword"
+    if(this.hasPassword){
+      this.oldPwd =  this.common.addSalt(this.oldPwd,localStorage.getItem("salt"));
+    }
+    this.newPwd =  this.common.addSalt(this.newPwd,localStorage.getItem("salt"));
+
+    console.log(this.oldPwd+this.newPwd)
     const body = new HttpParams()
       .set("wechatId", localStorage.getItem("wechatId"))
-      .set("oldPwd", this.oldPwd).set("newPwd", this.newPwd)
+      .set("oldPwd", this.oldPwd)
+      .set("newPwd", this.newPwd)
       .set("hasPassword", this.hasPassword)
       .set("token", localStorage.getItem("token"))
     let httpOptions = {

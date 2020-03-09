@@ -30,7 +30,7 @@
       <ion-list *ngFor="let q of questionList" lines="none">
         <ion-item>
           <ion-avatar slot="start">
-            <img src="{{baseUrl}}/{{q.imgPath}}">
+            <img src="{{resourceUrl}}/{{q.imgPath}}">
           </ion-avatar>
           <ion-label style="height: 2rem;">
             <h2 style="font-size: 12px;">{{q.userName}}</h2>
@@ -50,7 +50,7 @@
         <ion-list *ngFor="let q of allQuestionList" lines="none">
           <ion-item>
             <ion-avatar slot="start">
-              <img src="{{baseUrl}}/{{q.imgPath}}">
+              <img src="{{resourceUrl}}/{{q.imgPath}}">
             </ion-avatar>
             <ion-label style="height: 2rem;">
               <h2 style="font-size: 12px;">{{q.userName}}</h2>

@@ -28,7 +28,9 @@ export class PictureInformationPage implements OnInit {
   slideOpts = {
     initialSlide: 0
   };
+  resourceUrl:string
   ngOnInit() {
+    this.resourceUrl = globalVar.resourceUrl;
     this.baseUrl = this.baseUrl = globalVar.baseUrl
     this.activatedRoute.queryParams.subscribe((data: any) => {
       this.wechatId = data.wechatId;

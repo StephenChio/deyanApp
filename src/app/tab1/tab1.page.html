@@ -18,7 +18,7 @@
     <ion-item-sliding *ngFor="let item of chatsGroup" (ionDrag)="initStatus()">
       <ion-item (click)="showChat(item.fUserName,item.wechatId,item.imgPath)">
         <ion-avatar slot="start">
-          <img style="height: 40px;width: 40px;border-radius: 5px;" src="{{baseUrl}}/{{item.imgPath}}">
+          <img style="height: 40px;width: 40px;border-radius: 5px;" src="{{resourceUrl}}/{{item.imgPath}}">
         </ion-avatar>
         <ion-label style="height: 2.5rem;">
           <h2>{{item.fUserName}}</h2>
@@ -42,7 +42,7 @@
     <ion-item-sliding *ngFor="let item of searchChatList" (ionDrag)="initStatus()">
       <ion-item (click)="showChat(item.fUserName,item.wechatId,item.imgPath)">
         <ion-avatar slot="start">
-          <img style="height: 40px;width: 40px; border-radius: 5px;" src="{{baseUrl}}/{{item.imgPath}}">
+          <img style="height: 40px;width: 40px; border-radius: 5px;" src="{{resourceUrl}}/{{item.imgPath}}">
         </ion-avatar>
         <ion-label style="height: 2.5rem;">
           <h2>{{item.fUserName}}</h2>

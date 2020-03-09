@@ -24,6 +24,7 @@ export class LoginPage implements OnInit {
     }
     else {
       // console.log(this.phone)
+      this.common.getSalt(this.phone)
       this.router.navigate(['/verifi-page'],{
         queryParams: { phone: this.phone }
       })

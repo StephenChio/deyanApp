@@ -17,8 +17,10 @@ export class AlbumPage implements OnInit {
   imgPath: string;
   backgroundImg: string;
   baseUrl: string;
+  resourceUrl:string;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl
+    this.resourceUrl = globalVar.resourceUrl
     this.wechatId = localStorage.getItem("wechatId")
     this.activatedRoute.queryParams.subscribe((data: any) => {
       this.getMomentsPictureByWechatId(this.wechatId)

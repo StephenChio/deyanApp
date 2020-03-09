@@ -109,7 +109,7 @@
     <div *ngIf="wechatId !== message.wechatId" style="margin-top: 2rem;margin-bottom: 1rem;">
       <div class="chat-sender">
         <div>
-          <img style = "height: 40px;width: 40px; border-radius: 5px;" src="{{baseUrl}}/{{message.imgPath}}"></div>
+          <img style = "height: 40px;width: 40px; border-radius: 5px;" src="{{resourceUrl}}/{{message.imgPath}}"></div>
         <div>
           <div class="chat-left_triangle"></div>
           <span>{{message.msg}}</span>
@@ -121,7 +121,7 @@
     <div *ngIf="wechatId === message.wechatId" style="margin-top: 2rem;margin-bottom: 1rem;">
       <div class="chat-receiver">
         <div>
-          <img style = "height: 40px;width: 40px; border-radius: 5px;" src="{{baseUrl}}/{{message.imgPath}}"></div>
+          <img style = "height: 40px;width: 40px; border-radius: 5px;" src="{{resourceUrl}}/{{message.imgPath}}"></div>
         <div>
           <div class="chat-right_triangle"></div>
           <span>{{message.msg}}</span>

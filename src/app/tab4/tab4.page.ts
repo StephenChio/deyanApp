@@ -19,8 +19,10 @@ export class Tab4Page implements OnInit {
   userLevel:string;
   points:string;
   experience:string;
+  resourceUrl:string;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
+    this.resourceUrl = globalVar.resourceUrl;
     this.userName = window.localStorage.getItem("userName");
     this.wechatId = window.localStorage.getItem("wechatId");
     this.imgPath = window.localStorage.getItem("imgPath");

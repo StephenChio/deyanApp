@@ -13,9 +13,11 @@ export class CollectPage implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, private common: Common, private globalVar: globalVar) { }
   baseUrl: any;
+  resourceUrl:string;
   questionList = []
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
+    this.resourceUrl = globalVar.resourceUrl
     this.getMyCollect()
   }
   doRefresh(event) {
@@ -40,7 +42,7 @@ export class CollectPage implements OnInit {
         localStorage.setItem("token", data["token"]);
         if (data["respCode"] == "00") {
           this.questionList = data["data"]
-          console.log(this.questionList)
+          // console.log(this.questionList)
         }
       },
         error => {
