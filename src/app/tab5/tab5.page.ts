@@ -33,8 +33,8 @@ export class Tab5Page implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.date = data["data"]
         } else {
           this.common.presentAlert(data["respMsg"])

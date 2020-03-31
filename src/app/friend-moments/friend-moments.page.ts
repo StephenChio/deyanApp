@@ -36,7 +36,8 @@ export class FriendMomentsPage implements OnInit {
     let path = globalVar.baseUrl + "/moments/getMomentsByWechatId"
 
     const body = new HttpParams()
-      .set("wechatId", wechatId)
+      .set("fWechatId", wechatId)
+      .set("wechatId", localStorage.getItem("wechatId"))
       .set("token", localStorage.getItem("token"))
     let httpOptions = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -44,14 +45,14 @@ export class FriendMomentsPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.Moments = data["data"];
           // console.log(this.Moments)
-          this.imgPath = globalVar.baseUrl + "/" + data["data"][0].imgPath;
+          this.imgPath = globalVar.resourceUrl + "/" + data["data"][0].imgPath;
           this.userName = data["data"][0].userName;
           this.sign = data["data"][0].sign;
-          this.backgroundImg = globalVar.baseUrl + "/" + data["data"][0].backgroundImg;
+          this.backgroundImg = globalVar.resourceUrl + "/" + data["data"][0].backgroundImg;
         } else {
           this.common.presentAlert(data["respMsg"])
         }

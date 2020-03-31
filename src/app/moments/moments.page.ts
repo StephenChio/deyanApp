@@ -84,8 +84,8 @@ export class MomentsPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.Moments = data["data"];
           localStorage.setItem(this.wechatId+"Moments",JSON.stringify(this.Moments));
         } else {
@@ -113,8 +113,9 @@ export class MomentsPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.common.presentAlert(data["respMsg"])
           this.backgroundImg = globalVar.baseUrl + "/" + data["data"].backgroundImg;
           localStorage.setItem("backgroundImg", data["data"].backgroundImg)
@@ -238,8 +239,8 @@ export class MomentsPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.getMoments()
         } else {
           this.common.presentAlert(data["respMsg"])
@@ -299,6 +300,7 @@ export class MomentsPage implements OnInit {
   deleteMomentsById(id: any) {
     let path = globalVar.baseUrl + "/moments/deleteMomentsById"
     const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
       .set("id", id)
       .set("token", localStorage.getItem("token"))
     let httpOptions = {
@@ -307,8 +309,8 @@ export class MomentsPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.getMoments()
         } else {
           this.common.presentAlert(data["respMsg"])

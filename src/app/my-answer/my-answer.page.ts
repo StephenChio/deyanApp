@@ -14,8 +14,10 @@ export class MyAnswerPage implements OnInit {
   constructor(private router: Router, private http: HttpClient, private common: Common, private globalVar: globalVar) { }
   baseUrl:any;
   questionList = []
+  resourceUrl:string;
   ngOnInit() {
     this.baseUrl = globalVar.baseUrl;
+    this.resourceUrl = globalVar.resourceUrl;
     this.getMyAnswer()
   }
   doRefresh(event){
@@ -37,8 +39,8 @@ export class MyAnswerPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.questionList = data["data"]
           console.log(this.questionList)
         }

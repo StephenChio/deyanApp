@@ -186,7 +186,9 @@ export class PictureInformationPage implements OnInit {
    */
   deleteMomentsById(id: any) {
     let path = globalVar.baseUrl + "/moments/deleteMomentsById"
-    const body = new HttpParams().set("id", id)
+    const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
+      .set("id", id)
       .set("token", localStorage.getItem("token"))
     let httpOptions = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -194,8 +196,8 @@ export class PictureInformationPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.router.navigate(['/album'])
         }
         this.common.presentAlert(data["respMsg"])

@@ -31,7 +31,7 @@ export class Common {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
           localStorage.setItem("salt",data["data"]);
         }
         else {

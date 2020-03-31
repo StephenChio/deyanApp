@@ -13,7 +13,7 @@ export class NewFriendPage implements OnInit {
   constructor(private globalVar: globalVar, private http: HttpClient, private common: Common) { }
   newFriend = []
   baseUrl: string;
-  resouceUrl:string
+  resourceUrl:string;
   ngOnInit() {
     this.resourceUrl = globalVar.resourceUrl;
     this.baseUrl = globalVar.baseUrl;
@@ -33,8 +33,9 @@ export class NewFriendPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.newFriend = data["data"];
         } else {
           this.common.presentAlert(data["respMsg"])

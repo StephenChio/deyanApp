@@ -52,7 +52,7 @@ export class VerifiPagePage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
           this.isSend = true;
           this.countDown(60);
         }
@@ -97,7 +97,7 @@ export class VerifiPagePage implements OnInit {
     }
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
           localStorage.setItem("token", data["token"]);
           var data = data["data"];
           // console.log(data)

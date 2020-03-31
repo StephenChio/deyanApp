@@ -31,7 +31,8 @@ export class AlbumPage implements OnInit {
     let path = globalVar.baseUrl + "/moments/getMomentsPictureByWechatId"
 
     const body = new HttpParams()
-      .set("wechatId", wechatId)
+      .set("fWechatId", wechatId)
+      .set("wechatId",localStorage.getItem("wechatId"))
       .set("token", localStorage.getItem("token"))
 
     let httpOptions = {
@@ -40,8 +41,8 @@ export class AlbumPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.Moments = data["data"];
           this.imgPath = globalVar.baseUrl + "/" + data["data"][0].imgPath;
           this.userName = data["data"][0].userName;

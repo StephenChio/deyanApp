@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class globalVar {
-// public static baseUrl = "http://106.13.211.195:8235"
+// public static baseUrl = "http://182.92.129.204:8235"
+public static successCode = "200";
 public static baseUrl = "http://localhost:8235"
+// public static resourceUrl = "http://182.92.129.204:8080"
 public static resourceUrl = "http://localhost:8080"
 public static version = "1.0"
 public static busyAlert = "服务器繁忙,请重试"

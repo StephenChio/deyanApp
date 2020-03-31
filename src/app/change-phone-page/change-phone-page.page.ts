@@ -26,6 +26,7 @@ export class ChangePhonePagePage implements OnInit {
   checkPhoneUsed(phone: any) {
     let path = globalVar.baseUrl + "/checkPhoneUsed"
     const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
       .set("phone", phone)
       .set("token", localStorage.getItem("token"))
     let httpOptions = {
@@ -34,8 +35,8 @@ export class ChangePhonePagePage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.sendVerifiCode()
         }
         else{
@@ -71,6 +72,7 @@ export class ChangePhonePagePage implements OnInit {
   sendVerifiCode() {
     let path = globalVar.baseUrl + "/getVerifiCode"
     const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
       .set("phone", this.newPhone)
       .set("token", localStorage.getItem("token"))
     let httpOptions = {
@@ -79,8 +81,8 @@ export class ChangePhonePagePage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.router.navigate(['/write-verifi-code'], {
             queryParams: {
               phone: this.newPhone

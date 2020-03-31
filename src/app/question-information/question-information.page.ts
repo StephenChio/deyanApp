@@ -51,8 +51,8 @@ export class QuestionInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           // console.log(data["data"])
           this.title = data["data"].title
           this.questionInformation = []
@@ -80,8 +80,9 @@ export class QuestionInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+      
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.isFollow = data["data"];
         }
       },
@@ -110,8 +111,9 @@ export class QuestionInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           // this.common.presentAlert(data["respMsg"])
           this.isFollow = false;
         }
@@ -133,8 +135,8 @@ export class QuestionInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           // this.common.presentAlert(data["respMsg"])
           this.isFollow = true;
         }

@@ -81,8 +81,8 @@ export class AllQuestionPagePage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           // console.log(data["data"])
           this.allQuestionList = data["data"]
         }
@@ -103,8 +103,8 @@ export class AllQuestionPagePage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           // console.log(data["data"])
           this.questionList = data["data"]
         }

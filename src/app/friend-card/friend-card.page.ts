@@ -15,7 +15,7 @@ export class FriendCardPage implements OnInit {
   public imgPath: string;
   public type = "添加好友"
   public baseUrl: string;
-  resourceUrl:string
+  resourceUrl:string;
   public remarkName: string;
   public Img4: any;
   public name: any;
@@ -44,7 +44,7 @@ export class FriendCardPage implements OnInit {
         this.userName = null
       }
       this.baseUrl = globalVar.baseUrl;
-      this.resourceUrl =globalVar.baseUrl;
+      this.resourceUrl =globalVar.resourceUrl;
       if (data.type == "acceptConfirm") {
         this.type = "确认添加";
       }
@@ -62,7 +62,8 @@ export class FriendCardPage implements OnInit {
   get4MomentsImgByWechatId() {
     let path = globalVar.baseUrl + "/resource/get4MomentsImgByWechatId"
     const body = new HttpParams()
-      .set("wechatId", this.wechatId)
+      .set("fWechatId", this.wechatId)
+      .set("wechatId", localStorage.getItem("wechatId"))
       .set("token", localStorage.getItem("token"))
     let httpOptions = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -70,8 +71,8 @@ export class FriendCardPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.Img4 = data["data"]
         }
         else {
@@ -115,8 +116,8 @@ export class FriendCardPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.common.presentAlert(data["respMsg"])
         } else {
           this.common.presentAlert(data["respMsg"])

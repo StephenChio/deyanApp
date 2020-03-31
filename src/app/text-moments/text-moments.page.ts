@@ -59,7 +59,8 @@ export class TextMomentsPage implements OnInit {
       this.common.presentAlert("请勿输入超过120个字")
       return;
     }
-    const body = new HttpParams().set("wechatId", localStorage.getItem("wechatId"))
+    const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
       .set("text", this.text)
       .set("pictureMoments", this.pictureMoments)
       .set("token", localStorage.getItem("token"))
@@ -70,8 +71,8 @@ export class TextMomentsPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.text = "";
           this.common.presentAlert(data["respMsg"])
           this.router.navigate(['/moments'],{

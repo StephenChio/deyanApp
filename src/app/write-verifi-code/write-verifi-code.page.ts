@@ -51,8 +51,8 @@ export class WriteVerifiCodePage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           localStorage.setItem("phone", this.phone)
         }
         this.common.presentAlert(data["respMsg"]);
@@ -86,6 +86,7 @@ export class WriteVerifiCodePage implements OnInit {
   getVerifiCode() {
     let path = globalVar.baseUrl + "/getVerifiCode"
     const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
       .set("phone", this.phone)
       .set("token", localStorage.getItem("token"))
     let httpOptions = {

@@ -39,8 +39,8 @@ export class CollectPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.questionList = data["data"]
           // console.log(this.questionList)
         }

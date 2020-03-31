@@ -68,7 +68,7 @@ export class SetPasswordPage implements OnInit {
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
         localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
           this.newPwd = null;
           this.confirmPwd = null;
           this.oldPwd = null;

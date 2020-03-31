@@ -52,8 +52,8 @@ export class AnswerInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.isLike = data["data"];
           // this.common.presentAlert(this.isLike)
         }
@@ -76,8 +76,8 @@ export class AnswerInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.isCollect = data["data"];
           // this.common.presentAlert(this.isLike)
         }
@@ -106,8 +106,8 @@ export class AnswerInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.isFriendFlag = data["data"];
           // console.log(this.isFriendFlag)
         }
@@ -136,6 +136,7 @@ export class AnswerInformationPage implements OnInit {
   getAnswerById(id:any){
     let path = globalVar.baseUrl + "/answerList/getAnswerById"
     const body = new HttpParams()
+      .set("wechatId", localStorage.getItem("wechatId"))
       .set("questionId",this.questionId)
       .set("id", id)
       .set("token", localStorage.getItem("token"))
@@ -146,8 +147,8 @@ export class AnswerInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.log(data["data"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.answer = []
           this.answer.push(data["data"])
           this.collectNum = data["data"].collectNum
@@ -179,8 +180,9 @@ export class AnswerInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.isLike = true;
           this.likeNum = Number(this.likeNum) + 1
         }
@@ -202,8 +204,8 @@ export class AnswerInformationPage implements OnInit {
       .subscribe(data => {
         if (data == null) this.common.quit(globalVar.loginTimeOutAlert);
         // this.common.presentAlert(data["respMsg"])
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.isLike = false;
           this.likeNum = Number(this.likeNum) - 1
         }
@@ -238,8 +240,8 @@ export class AnswerInformationPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           if (data["data"].length > 0) {
             this.router.navigate(['/friend-card'],
               {
@@ -266,8 +268,8 @@ export class AnswerInformationPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.isCollect = true;
           this.collectNum = Number(this.collectNum) + 1
         }
@@ -290,8 +292,8 @@ export class AnswerInformationPage implements OnInit {
     this.http.post(path, body, httpOptions)
       .subscribe(data => {
         if(data==null)this.common.quit(globalVar.loginTimeOutAlert);
-        localStorage.setItem("token", data["token"]);
-        if (data["respCode"] == "00") {
+        if (data["respCode"] == globalVar.successCode) {
+          localStorage.setItem("token", data["token"]);
           this.isCollect = false;
           this.collectNum = Number(this.collectNum) - 1
         }
