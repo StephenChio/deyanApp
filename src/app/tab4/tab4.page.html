@@ -22,12 +22,12 @@
       </ion-card-header>
     </ion-card>
   </ion-item>
-  <ion-list lines="none">
+  <!-- <ion-list lines="none">
     <ion-item>
       <ion-icon slot="start" color="medium" name="wallet"></ion-icon>
       <ion-label>支付</ion-label>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
   <ion-list lines="none">
     <ion-item [routerLink]="['/my-question']">
       <ion-icon slot="start" color="medium" name="reader"></ion-icon>
@@ -41,7 +41,8 @@
       <ion-icon slot="start" color="medium" name="list-box"></ion-icon>
       <ion-label>我的回答</ion-label>
     </ion-item>
-
+  </ion-list> 
+  <ion-list lines="none">
     <ion-item [routerLink]="['/collect']">
       <ion-icon slot="start" color="medium" name="cube"></ion-icon>
       <ion-label>收藏</ion-label>

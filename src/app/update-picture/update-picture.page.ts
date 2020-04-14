@@ -16,7 +16,7 @@ export class UpdatePicturePage implements OnInit {
   imgPath: string;
   baseUrl: string;
   ngOnInit() {
-    this.imgPath = globalVar.baseUrl + "/" + localStorage.getItem("imgPath")
+    this.imgPath = globalVar.resourceUrl + "/" + localStorage.getItem("imgPath")
     this.baseUrl = globalVar.baseUrl;
   }
   async presentActionSheet() {

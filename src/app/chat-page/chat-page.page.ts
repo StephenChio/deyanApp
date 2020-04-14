@@ -76,6 +76,11 @@ export class ChatPagePage implements OnInit {
       //     localStorage.setItem(localStorage.getItem("wechatId")+_this.fWechatId,JSON.stringify(_this.chats))
       //     return;
       //   }
+      console.log(event.data)
+      if(event.data == "消息功能异常"){
+        _this.common.presentAlert("消息功能异常")
+        return;
+      }
       var resBody = JSON.parse(event.data)
       var remarkList = JSON.parse(localStorage.getItem(localStorage.getItem("wechatId") + "remarkList"))
       for (var p in remarkList) {
